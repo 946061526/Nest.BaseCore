@@ -1,0 +1,11 @@
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Common\bin\Debug\netcoreapp2.1\Nest.CoreWeb.Common.deps.json
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Common\bin\Debug\netcoreapp2.1\Nest.CoreWeb.Common.dll
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Common\bin\Debug\netcoreapp2.1\Nest.CoreWeb.Common.pdb
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Common\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Common.csproj.CoreCompileInputs.cache
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Common\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Common.AssemblyInfoInputs.cache
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Common\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Common.AssemblyInfo.cs
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Common\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Common.dll
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Common\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Common.pdb
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Common\bin\Debug\netcoreapp2.1\Newtonsoft.Json.dll
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Common\bin\Debug\netcoreapp2.1\Newtonsoft.Json.xml
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Common\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Common.csproj.CopyComplete

@@ -1,0 +1,3 @@
+D:\zzProj\Nest.BaseCore\Nest.BaseCore.Repository\obj\Debug\netcoreapp2.1\Nest.BaseCore.Repository.csproj.CoreCompileInputs.cache
+D:\zzProj\Nest.BaseCore\Nest.BaseCore.Repository\obj\Debug\netcoreapp2.1\Nest.BaseCore.Repository.AssemblyInfoInputs.cache
+D:\zzProj\Nest.BaseCore\Nest.BaseCore.Repository\obj\Debug\netcoreapp2.1\Nest.BaseCore.Repository.AssemblyInfo.cs

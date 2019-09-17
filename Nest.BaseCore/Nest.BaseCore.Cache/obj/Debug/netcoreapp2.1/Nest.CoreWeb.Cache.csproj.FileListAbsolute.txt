@@ -1,0 +1,9 @@
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Cache\bin\Debug\netcoreapp2.1\Nest.CoreWeb.Cache.deps.json
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Cache\bin\Debug\netcoreapp2.1\Nest.CoreWeb.Cache.dll
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Cache\bin\Debug\netcoreapp2.1\Nest.CoreWeb.Cache.pdb
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Cache\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Cache.csproj.CoreCompileInputs.cache
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Cache\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Cache.AssemblyInfoInputs.cache
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Cache\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Cache.AssemblyInfo.cs
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Cache\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Cache.dll
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Cache\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Cache.pdb
+D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Cache\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Cache.csprojAssemblyReference.cache

@@ -1,0 +1,8 @@
+D:\zzProj\Nest.BaseCore\Nest.BaseCore.MessageQueue\bin\Debug\netcoreapp2.1\Nest.BaseCore.MessageQueue.deps.json
+D:\zzProj\Nest.BaseCore\Nest.BaseCore.MessageQueue\bin\Debug\netcoreapp2.1\Nest.BaseCore.MessageQueue.dll
+D:\zzProj\Nest.BaseCore\Nest.BaseCore.MessageQueue\bin\Debug\netcoreapp2.1\Nest.BaseCore.MessageQueue.pdb
+D:\zzProj\Nest.BaseCore\Nest.BaseCore.MessageQueue\obj\Debug\netcoreapp2.1\Nest.BaseCore.MessageQueue.csproj.CoreCompileInputs.cache
+D:\zzProj\Nest.BaseCore\Nest.BaseCore.MessageQueue\obj\Debug\netcoreapp2.1\Nest.BaseCore.MessageQueue.AssemblyInfoInputs.cache
+D:\zzProj\Nest.BaseCore\Nest.BaseCore.MessageQueue\obj\Debug\netcoreapp2.1\Nest.BaseCore.MessageQueue.AssemblyInfo.cs
+D:\zzProj\Nest.BaseCore\Nest.BaseCore.MessageQueue\obj\Debug\netcoreapp2.1\Nest.BaseCore.MessageQueue.dll
+D:\zzProj\Nest.BaseCore\Nest.BaseCore.MessageQueue\obj\Debug\netcoreapp2.1\Nest.BaseCore.MessageQueue.pdb
