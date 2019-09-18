@@ -29,3 +29,15 @@ D:\zzProj\Nest.CoreWeb\Nest.BaseCore.Domain\obj\Debug\netcoreapp2.1\Nest.BaseCor
 D:\zzProj\Nest.BaseCore\Nest.BaseCore.Domain\obj\Debug\netcoreapp2.1\Nest.BaseCore.Domain.csproj.CoreCompileInputs.cache
 D:\zzProj\Nest.BaseCore\Nest.BaseCore.Domain\obj\Debug\netcoreapp2.1\Nest.BaseCore.Domain.AssemblyInfoInputs.cache
 D:\zzProj\Nest.BaseCore\Nest.BaseCore.Domain\obj\Debug\netcoreapp2.1\Nest.BaseCore.Domain.AssemblyInfo.cs
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Domain\obj\Debug\netcoreapp2.1\Nest.BaseCore.Domain.csproj.CoreCompileInputs.cache
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Domain\obj\Debug\netcoreapp2.1\Nest.BaseCore.Domain.AssemblyInfoInputs.cache
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Domain\obj\Debug\netcoreapp2.1\Nest.BaseCore.Domain.AssemblyInfo.cs
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Domain\bin\Debug\netcoreapp2.1\Nest.BaseCore.Domain.deps.json
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Domain\bin\Debug\netcoreapp2.1\Nest.BaseCore.Domain.dll
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Domain\bin\Debug\netcoreapp2.1\Nest.BaseCore.Domain.pdb
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Domain\bin\Debug\netcoreapp2.1\Nest.BaseCore.Common.dll
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Domain\bin\Debug\netcoreapp2.1\Nest.BaseCore.Common.pdb
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Domain\obj\Debug\netcoreapp2.1\Nest.BaseCore.Domain.csprojAssemblyReference.cache
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Domain\obj\Debug\netcoreapp2.1\Nest.BaseCore.Domain.csproj.CopyComplete
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Domain\obj\Debug\netcoreapp2.1\Nest.BaseCore.Domain.dll
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Domain\obj\Debug\netcoreapp2.1\Nest.BaseCore.Domain.pdb

@@ -12,33 +12,34 @@ namespace Nest.BaseCore.Log
     /// </summary>
     public class Net4Logger
     {
-        // private static ILog logger;
+        private static readonly string _repositoryName = "Net4LoggerRepository";
 
-        private static log4net.Repository.ILoggerRepository _repository;
+        //private static log4net.Repository.ILoggerRepository _repository;
         private static ILog _logErr;
         private static ILog _logDebug;
         private static ILog _logInfo;
 
         static Net4Logger()
         {
-            if (_repository == null)
-            {
-                _repository = LogManager.CreateRepository("NETCoreRepository");
+            //if (_repository == null)
+            //{
+            //    _repository = LogManager.CreateRepository(_repositoryName);
 
-                //log4net从log4net.config文件中读取配置信息
-                XmlConfigurator.Configure(_repository, new FileInfo("log4net.config"));
-            }
+            //    //log4net从log4net.config文件中读取配置信息
+            //    XmlConfigurator.Configure(_repository, new FileInfo("log4net.config"));
+            //}
             if (_logDebug == null)
             {
-                _logDebug = LogManager.GetLogger(_repository.Name, "DebugLogger");
+                //_logDebug = LogManager.GetLogger(_repository.Name, "DebugLogger"); 
+                _logDebug = LogManager.GetLogger(_repositoryName, "DebugLogger");
             }
             if (_logErr == null)
             {
-                _logErr = LogManager.GetLogger(_repository.Name, "ErrorLogger");
+                _logErr = LogManager.GetLogger(_repositoryName, "ErrorLogger");
             }
             if (_logInfo == null)
             {
-                _logInfo = LogManager.GetLogger(_repository.Name, "InfoLogger");
+                _logInfo = LogManager.GetLogger(_repositoryName, "InfoLogger");
             }
         }
 

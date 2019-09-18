@@ -694,11 +694,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\zzProj\\Nest.BaseCore\\Nest.BaseCore.MessageQueue\\Nest.BaseCore.MessageQueue.csproj",
+      "projectUniqueName": "D:\\zzProj\\MyGit\\Nest.BaseCore\\Nest.BaseCore\\Nest.BaseCore.MessageQueue\\Nest.BaseCore.MessageQueue.csproj",
       "projectName": "Nest.BaseCore.MessageQueue",
-      "projectPath": "D:\\zzProj\\Nest.BaseCore\\Nest.BaseCore.MessageQueue\\Nest.BaseCore.MessageQueue.csproj",
+      "projectPath": "D:\\zzProj\\MyGit\\Nest.BaseCore\\Nest.BaseCore\\Nest.BaseCore.MessageQueue\\Nest.BaseCore.MessageQueue.csproj",
       "packagesPath": "C:\\Users\\cobber\\.nuget\\packages\\",
-      "outputPath": "D:\\zzProj\\Nest.BaseCore\\Nest.BaseCore.MessageQueue\\obj\\",
+      "outputPath": "D:\\zzProj\\MyGit\\Nest.BaseCore\\Nest.BaseCore\\Nest.BaseCore.MessageQueue\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

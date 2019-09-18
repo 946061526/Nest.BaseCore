@@ -52,7 +52,7 @@ namespace Nest.BaseCore.Service
         /// <param name="requestModel">参数</param>
         public List<LoginResponseModel> GetUserList()
         {
-            var result = _userRepository.GetAll().Select(a => new LoginResponseModel()
+            var result = _userRepository.Find().Select(a => new LoginResponseModel()
             {
                 UserId = a.id,
                 UserName = a.userName,
@@ -63,5 +63,66 @@ namespace Nest.BaseCore.Service
 
             return result;
         }
+
+
+        public int Add(User a)
+        {
+            User user = new User()
+            {
+                id = GuidTool.GetGuid(),
+                name = "Karroy",
+                userName = "Karroy",
+                password = "123",
+                roleId = "1"
+            };
+            _userRepository.Add(user);
+            return _userRepository.SaveChanges();
+        }
+        public int Add(List<User> t)
+        {
+            User user = new User()
+            {
+                id = GuidTool.GetGuid(),
+                name = "Karroy1",
+                userName = "Karroy1",
+                password = "123",
+                roleId = "1"
+            };
+            var users = new List<User>();
+            users.Add(user);
+            user = new User()
+            {
+                id = GuidTool.GetGuid(),
+                name = "jay",
+                userName = "jay",
+                password = "123",
+                roleId = "1"
+            };
+            users.Add(user);
+            _userRepository.Add(users);
+            return _userRepository.SaveChanges();
+        }
+
+        public int Update()
+        {
+            var user = _userRepository.FirstOrDefault(x => x.userName == "Karroy1");
+            user.password = "";
+            _userRepository.Update(user);
+            var i=_userRepository.SaveChanges();
+
+
+            var list = _userRepository.Find(x => x.password == "123").ToList();
+            list.ForEach(item =>
+            {
+                item.password = "";
+            });
+             _userRepository.Update(list);
+
+            i = _userRepository.SaveChanges();
+
+            return i;
+        }
+
+
     }
 }

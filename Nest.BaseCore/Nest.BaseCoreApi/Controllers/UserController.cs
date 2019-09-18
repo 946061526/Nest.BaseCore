@@ -51,5 +51,26 @@ namespace Nest.BaseCoreApi.Controllers
             result.Data = _userService.GetUserList();
             return result;
         }
+
+        [HttpPost]
+        [Route("Add")]
+        public void Add()
+        {
+            var i = _userService.Add(new BaseCore.Domain.User());
+        }
+
+        [HttpPost]
+        [Route("AddList")]
+        public void AddList()
+        {
+            var i = _userService.Add(new List<BaseCore.Domain.User>());
+
+        }
+        [HttpPost]
+        [Route("Update")]
+        public void Update()
+        {
+            _userService.Update();
+        }
     }
 }

@@ -5,9 +5,13 @@ using System.Text;
 
 namespace Nest.BaseCore.Repository
 {
+    public interface IUserRepository : IBaseRepository<User>
+    {
+
+    }
+
     public class TUserRepository : BaseRepository<User>, IUserRepository
     {
         public TUserRepository(MainContext db) : base(db) { }
     }
-    public interface IUserRepository : IRepository<User> { }
 }

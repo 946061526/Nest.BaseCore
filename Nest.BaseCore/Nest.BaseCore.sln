@@ -35,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.仓储层", "4.仓储层"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nest.BaseCore.Repository", "Nest.BaseCore.Repository\Nest.BaseCore.Repository.csproj", "{7857BBF8-B71D-4DB4-A30B-D38A9AA2A5A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.BaseCore.MessageQueue", "Nest.BaseCore.MessageQueue\Nest.BaseCore.MessageQueue.csproj", "{C9662E70-BEB5-4254-8F5F-EAFA8AF51759}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nest.BaseCore.MessageQueue", "Nest.BaseCore.MessageQueue\Nest.BaseCore.MessageQueue.csproj", "{C9662E70-BEB5-4254-8F5F-EAFA8AF51759}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

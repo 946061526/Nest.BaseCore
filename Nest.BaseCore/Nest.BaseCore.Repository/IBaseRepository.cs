@@ -6,180 +6,182 @@ using System.Linq.Expressions;
 
 namespace Nest.BaseCore.Repository
 {
-    ///// <summary>
-    ///// 仓储接口，定义公共的泛型GRUD
-    ///// </summary>
-    ///// <typeparam name="TEntity"></typeparam>
-    //public interface IBaseRepository<TEntity>: IRepository where TEntity : class
-    //{
+    public interface IBaseRepository<T> where T : class
+    {
+        #region 新增
 
-    //    #region 属性
+        /// <summary>
+        /// 添加
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        void Add(T entity);
+        /// <summary>
+        /// 添加集合
+        /// </summary>
+        /// <param name="entity">实体对象集合</param>
+        void Add(IEnumerable<T> entities);
+        #endregion
 
-    //    /// <summary>
-    //    /// 获取 当前实体的查询数据集
-    //    /// </summary>
-    //    IQueryable<TEntity> Entities { get; }
+        #region 删除
 
-    //    #endregion
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id">主键id</param>
+        void Delete(object id);
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        void Delete(T entity);
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="where">条件(lambda表达式)</param>
+        void Delete(Expression<Func<T, bool>> where);
+        /// <summary>
+        /// 删除集合
+        /// </summary>
+        /// <param name="entity">实体对象集合</param>
+        void Delete(IEnumerable<T> entities);
+        #endregion
 
-    //    #region 公共方法
-    //    /// <summary>
-    //    /// 根据lamada表达式查询集合
-    //    /// </summary>
-    //    /// <param name="express">lamada表达式</param>
-    //    /// <returns></returns>
-    //    IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> express);
+        #region 更新
 
-    //    /// <summary>
-    //    /// 插入实体记录
-    //    /// </summary>
-    //    /// <param name="entity">实体对象</param>
-    //    /// <returns>返回影响行数</returns>
-    //    int Insert(TEntity entity);
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        void Update(T entity);
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        /// <param name="fields">要更新的字段</param>
+        void Update(T entity, params string[] fields);
+        /// <summary>
+        /// 更新集合
+        /// </summary>
+        /// <param name="entity">实体对象集合</param>
+        void Update(IEnumerable<T> entities);
+        /// <summary>
+        /// 更新集合
+        /// </summary>
+        /// <param name="entity">实体对象集合</param>
+        /// <param name="fields">要更新的字段</param>
+        void Update(IEnumerable<T> entities, params string[] fields);
+        #endregion
 
-    //    /// <summary>
-    //    ///     批量插入实体记录集合
-    //    /// </summary>
-    //    /// <param name="entities"> 实体记录集合 </param>
-    //    /// <returns> 操作影响的行数 </returns>
-    //    int Insert(IEnumerable<TEntity> entities);
+        #region 查询
 
-    //    /// <summary>
-    //    ///     删除指定编号的记录
-    //    /// </summary>
-    //    /// <param name="id"> 实体记录编号 </param>
-    //    /// <returns> 操作影响的行数 </returns>
-    //    int Delete(object id);
+        /// <summary>
+        /// 根据ID获取一个对象
+        /// </summary>
+        /// <param name="id">主键ID</param>
+        /// <returns>对象</returns>
+        T FindById(object id);
+        /// <summary>
+        /// 根据条件获取一个对象
+        /// </summary>
+        /// <param name="where">条件(lambda表达式)</param>
+        /// <returns>对象</returns>
+        T FirstOrDefault(Expression<Func<T, bool>> where = null);
+        /// <summary>
+        /// 根据条件获取一个对象
+        /// </summary>
+        /// <param name="where">条件(lambda表达式)</param>
+        /// <param name="orderby">排序</param>
+        /// <returns></returns>
+        T FirstOrDefault(Expression<Func<T, bool>> where = null, params IOrderByBuilder<T>[] orderby);
+        /// <summary>
+        /// 获取所有数据
+        /// </summary>
+        /// <returns>所有数据</returns>
+        IQueryable<T> Find();
+        /// <summary>
+        /// 根据条件获取数据
+        /// </summary>
+        /// <param name="where">条件(lambda表达式)</param>
+        /// <returns>数据</returns>
+        IQueryable<T> Find(Expression<Func<T, bool>> where);
+        /// <summary>
+        /// 获取分页数据
+        /// </summary>
+        /// <param name="totalCount"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize">页数大小</param>
+        /// <param name="where">查询条件</param>
+        /// <param name="orderby">排序方式：new OrderByBuilder TEntity string (a => a.UserName[,true])，true=倒序，默认false正序</param>
+        /// <returns></returns>
+        IQueryable<T> Find(out int totalCount, int pageIndex = 1, int pageSize = 10, Expression<Func<T, bool>> where = null, params IOrderByBuilder<T>[] orderby);
+        /// <summary>
+        /// 获取分页数据
+        /// </summary>
+        /// <param name="totalCount"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize">页数大小</param>
+        /// <param name="query">linq表达式</param>
+        /// <returns></returns>
+        IQueryable<SEntity> Find<SEntity>(out int totalCount, int pageIndex = 1, int pageSize = 10, IQueryable<SEntity> query = null);
+        /// <summary>
+        /// 是否有指定条件的元素
+        /// </summary>
+        /// <param name="where">条件(lambda表达式)</param>
+        /// <returns></returns>
+        bool Any(Expression<Func<T, bool>> where = null);
+        /// <summary>
+        /// 根据条件获取记录数
+        /// </summary>
+        /// <param name="where">条件(lambda表达式)</param>
+        /// <returns></returns>
+        int Count(Expression<Func<T, bool>> where = null);
+        #endregion
 
-    //    /// <summary>
-    //    ///     删除实体记录
-    //    /// </summary>
-    //    /// <param name="entity"> 实体对象 </param>
-    //    /// <returns> 操作影响的行数 </returns>
-    //    int Delete(TEntity entity);
+        #region 执行sql语句
 
-    //    /// <summary>
-    //    ///     删除实体记录集合
-    //    /// </summary>
-    //    /// <param name="entities"> 实体记录集合 </param>
-    //    /// <returns> 操作影响的行数 </returns>
-    //    int Delete(IEnumerable<TEntity> entities);
+        /// <summary>
+        /// 执行SQL返回受影响行数
+        /// </summary>
+        /// <param name="SqlCommandText">SQL语句</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>受影响行数</returns>
+        int ExecuteBySql(string SqlCommandText, params object[] parameters);
+        /// <summary>
+        /// 执行存储过程返回受影响行数
+        /// </summary>
+        /// <param name="ProcName">存储过程名称</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>受影响行数</returns>
+        int ExecuteByProc(string ProcName, params object[] parameters);
+        /// <summary>
+        /// 执行sql查询
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="sql">sql语句</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>结果集</returns>
+        IEnumerable<TEntity> FindBySql<TEntity>(string sql, params object[] parameters) where TEntity : new();
+        /// <summary>
+        /// 执行存储过程查询
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="procName">存储过程名称</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>结果集</returns>
+        IEnumerable<TEntity> FindByProc<TEntity>(string procName, params object[] parameters) where TEntity : new();
+        /// <summary>
+        /// 批量新增
+        /// </summary>
+        /// <typeparam name="TEntity">泛型集合的类型</typeparam>
+        /// <param name="tableName">表名</param>
+        /// <param name="list">数据集合</param>
+        void BulkInsert<TEntity>(IList<TEntity> list, string tableName = "");
+        #endregion
 
-    //    /// <summary>
-    //    ///     根据lamada表达式删除对象
-    //    /// </summary>
-    //    /// <param name="selector"> lamada表达式 </param>
-    //    /// <returns> 操作影响的行数 </returns>
-    //    int Delete(Expression<Func<TEntity, bool>> express);
-
-    //    /// <summary>
-    //    ///     更新实体记录
-    //    /// </summary>
-    //    /// <param name="entity"> 实体对象 </param>
-    //    /// <param name="fields"> 修改字段名集合</param>
-    //    /// <returns> 操作影响的行数 </returns>
-    //    int Update(TEntity entity, params string[] fields);
-
-    //    /// <summary>
-    //    ///     更新实体记录
-    //    /// </summary>
-    //    /// <param name="entity"> 实体对象集合 </param>
-    //    /// <param name="fields"> 修改字段名集合</param>
-    //    /// <returns> 操作影响的行数 </returns>
-    //    int Update(IEnumerable<TEntity> entitys, params string[] fields);
-
-    //    /// <summary>
-    //    ///     查找指定主键的实体记录
-    //    /// </summary>
-    //    /// <param name="key"> 指定主键 </param>
-    //    /// <returns> 符合编号的记录，不存在返回null </returns>
-    //    TEntity GetByKey(object key);
-
-    //    /// <summary>
-    //    /// 保存修改
-    //    /// </summary>
-    //    /// <returns></returns>
-    //    int Commit();
-
-    //    /// <summary>
-    //    /// 放弃保存
-    //    /// </summary>
-    //    /// <returns></returns>
-    //    void RollBack();
-
-    //    #region 增强CURD
-
-    //    /// <summary>
-    //    /// 根据过滤条件，获取记录
-    //    /// </summary>
-    //    /// <param name="whereLambda">过滤条件</param>
-    //    /// <param name="orderLambda">排序条件</param>
-    //    /// <returns>IQueryable查询对象</returns>
-    //    IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> whereLambda = null, params IOrderByBuilder<TEntity>[] orderLambda);
-
-    //    /// <summary>
-    //    /// 根据过滤条件，获取单个实体
-    //    /// </summary>
-    //    /// <param name="whereLambda">过滤条件</param>
-    //    /// <returns>实体</returns>
-    //    TEntity FirstOrDefault(Expression<Func<TEntity, bool>> whereLambda = null);
-
-    //    /// <summary>
-    //    /// 根据过滤条件，判断是否存在数据
-    //    /// </summary>
-    //    /// <param name="whereLambda">过滤条件</param>
-    //    /// <returns>实体</returns>
-    //    bool Any(Expression<Func<TEntity, bool>> whereLambda = null);
-
-    //    /// <summary>
-    //    /// 根据过滤条件，获取数量
-    //    /// </summary>
-    //    /// <param name="whereLambda">过滤条件</param>
-    //    /// <returns>实体</returns>
-    //    int Count(Expression<Func<TEntity, bool>> whereLambda = null);
-
-    //    /// <summary>
-    //    /// 批量更新数据，实现按需要只更新部分更新
-    //    /// <para>如：Update(u =>u.Id==1,u =>new User{Name="ok"});</para>
-    //    /// </summary>
-    //    /// <param name="whereLambda">条件表达式：u =>u.Id==1</param>
-    //    /// <param name="updateLambda">更新表达式：u =>new User{Name="ok"}</param>
-    //    /// <returns>是否添加成功：true是，false否</returns>
-    //    bool BatchUpdate(Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, TEntity>> updateLambda);
-
-    //    /// <summary>
-    //    /// 批量删除数据
-    //    /// </summary>
-    //    /// <param name="whereLambda"></param>
-    //    /// <returns>是否添加成功：true是，false否</returns>
-    //    bool BatchDelete(Expression<Func<TEntity, bool>> whereLambda);
-
-    //    #endregion
-
-    //    #region 分页
-    //    /// <summary>
-    //    /// 获取分页数据
-    //    /// </summary>
-    //    /// <param name="totalCount"></param>
-    //    /// <param name="pageIndex"></param>
-    //    /// <param name="pageSize">页数大小</param>
-    //    /// <param name="whereLambda"></param>
-    //    /// <param name="orderLambda">排序方式：new OrderByBuilder<TEntity, string>(a => a.UserName[,true])，true=倒序，默认false正序</param>
-    //    /// <returns></returns>
-    //    IQueryable<TEntity> Find(out int totalCount, int pageIndex = 1, int pageSize = 10, Expression<Func<TEntity, bool>> whereLambda = null, params IOrderByBuilder<TEntity>[] orderLambda);
-
-    //    /// <summary>
-    //    /// 获取分页数据
-    //    /// </summary>
-    //    /// <param name="totalCount"></param>
-    //    /// <param name="pageIndex"></param>
-    //    /// <param name="pageSize">页数大小</param>
-    //    /// <param name="query">linq表达式</param>
-    //    /// <returns></returns>
-    //    IQueryable<TEntity> Find(out int totalCount, int pageIndex = 1, int pageSize = 10, IQueryable<TEntity> query = null);
-
-    //    #endregion
-
-    //    #endregion
-    //}
+        /// <summary>
+        /// 保存上下文
+        /// </summary>
+        /// <returns></returns>
+        int SaveChanges();
+    }
 }

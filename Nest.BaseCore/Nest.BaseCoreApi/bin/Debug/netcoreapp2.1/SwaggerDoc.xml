@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nest.BaseCoreApi</name>
+    </assembly>
+    <members>
+        <member name="M:Nest.BaseCoreApi.Controllers.RoleController.GetRoleList">
+            <summary>
+            查询用户
+            </summary>
+            <param name="requestModel">参数</param>
+        </member>
+        <member name="M:Nest.BaseCoreApi.Controllers.TestController.TestLog">
+            <summary>
+            测试Log
+            </summary>
+        </member>
+        <member name="T:Nest.BaseCoreApi.Controllers.UserController">
+            <summary>
+            用户服务
+            </summary>
+        </member>
+        <member name="M:Nest.BaseCoreApi.Controllers.UserController.Login(Nest.BaseCore.Domain.RequestModel.LoginRequestModel)">
+            <summary>
+            登录
+            </summary>
+            <param name="requestModel">参数</param>
+        </member>
+        <member name="M:Nest.BaseCoreApi.Controllers.UserController.GetUserList">
+            <summary>
+            查询用户
+            </summary>
+            <param name="requestModel">参数</param>
+        </member>
+        <member name="T:Nest.BaseCoreApi.Startup.AddAuthTokenHeaderParameter">
+            <summary>
+            请求头加Token参数
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -3,360 +3,545 @@ using Nest.BaseCore.Common;
 using Nest.BaseCore.Domain;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
-//using System.Linq.Dynamic;
 using System.Linq.Expressions;
-using System.Transactions;
 
 namespace Nest.BaseCore.Repository
 {
-    //public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
-    //{
-    //    public MainContext UnitOfWork { get; set; }
-
-    //    public BaseRepository(MainContext db)
-    //    {
-    //        UnitOfWork = db;
-    //    }
-
-    //    IQueryable<TEntity> IBaseRepository<TEntity>.Entities
-    //    {
-    //        get
-    //        {
-    //            return UnitOfWork.Set<TEntity>();
-    //        }
-    //    }
-
-    //    public virtual TEntity GetByKey(object key)
-    //    {
-    //        return UnitOfWork.Set<TEntity>().Find(key);
-    //    }
-
-    //    public virtual IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> express)
-    //    {
-    //        return Set().AsQueryable().Where(express);
-    //    }
-
-
-    //    public virtual int Insert(TEntity entity)
-    //    {
-    //        //UnitOfWork.RegisterNew(entity);
-    //        return 1;
-    //    }
-
-    //    public virtual int Insert(IEnumerable<TEntity> entities)
-    //    {
-    //        foreach (var obj in entities)
-    //        {
-    //            //UnitOfWork.RegisterNew(obj);
-    //        }
-    //        return 1;
-    //    }
-
-    //    public virtual int Delete(object id)
-    //    {
-    //        //var obj = UnitOfWork.context.Set<TEntity>().Find(id);
-    //        //if (obj == null)
-    //        //{
-    //        //    return 0;
-    //        //}
-    //        //UnitOfWork.RegisterDeleted(obj);
-    //        return 1;
-    //    }
-
-    //    public virtual int Delete(TEntity entity)
-    //    {
-    //        //UnitOfWork.RegisterDeleted(entity);
-    //        return 1;
-    //    }
-
-    //    public virtual int Delete(IEnumerable<TEntity> entities)
-    //    {
-    //        foreach (var entity in entities)
-    //        {
-    //            //UnitOfWork.RegisterDeleted(entity);
-    //        }
-    //        return 1;
-    //    }
-
-    //    public virtual int Delete(Expression<Func<TEntity, bool>> express)
-    //    {
-    //        var lstEntity = Set().AsQueryable().Where(express);
-    //        //foreach (var entity in lstEntity)
-    //        //{
-    //        //    UnitOfWork.RegisterDeleted(entity);
-    //        //}
-    //        return 1;
-    //    }
-
-    //    public virtual int Update(TEntity entity, params string[] fields)
-    //    {
-    //        // UnitOfWork.RegisterModified(entity, fields);
-    //        return 1;
-    //    }
-
-    //    /// <summary>
-    //    ///     更新实体记录
-    //    /// </summary>
-    //    /// <param name="entity"> 实体对象集合 </param>
-    //    /// <param name="fields"> 修改字段名集合</param>
-    //    /// <returns> 操作影响的行数 </returns>
-    //    public int Update(IEnumerable<TEntity> entitys, params string[] fields)
-    //    {
-    //        foreach (var entity in entitys)
-    //        {
-    //            // UnitOfWork.RegisterModified(entity, fields);
-    //        }
-    //        return entitys.Count();
-    //    }
-    //    /// <summary>
-    //    /// 保存修改
-    //    /// </summary>
-    //    /// <returns></returns>
-    //    public int Commit()
-    //    {
-    //        //return UnitOfWork.Commit();
-    //        return 1;
-    //    }
-
-    //    /// <summary>
-    //    /// 分布式事务
-    //    /// </summary>
-    //    /// <returns></returns>
-    //    public TransactionScope BeginTrans()
-    //    {
-    //        var transaction = new TransactionScope(TransactionScopeOption.Required);
-    //        return transaction;
-    //    }
-
-    //    /// <summary>
-    //    /// 放弃保存
-    //    /// </summary>
-    //    /// <returns></returns>
-    //    public void RollBack()
-    //    {
-    //        //UnitOfWork.RollBack();
-    //    }
-    //    #region 基础设置
-    //    /// <summary>
-    //    /// 获取当前DbSet
-    //    /// </summary>
-    //    /// <returns></returns>
-    //    public DbSet<TEntity> Set()
-    //    {
-    //        return UnitOfWork.Set<TEntity>();
-    //    }
-    //    #endregion
-    //    #region 增强CURD
-    //    /// <summary>
-    //    /// 根据过滤条件，获取记录
-    //    /// </summary>
-    //    /// <param name="whereLambda">过滤条件</param>
-    //    /// <param name="orderLambda">排序条件</param>
-    //    /// <returns>IQueryable查询对象</returns>
-    //    public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> whereLambda = null, params IOrderByBuilder<TEntity>[] orderLambda)
-    //    {
-    //        var query = Set().AsQueryable();
-    //        if (whereLambda != null)
-    //        {
-    //            query = query.Where(whereLambda);
-    //        }
-
-    //        if (orderLambda != null)
-    //        {
-    //            query = query.OrderBy(orderLambda);
-    //        }
-    //        return query.AsNoTracking().AsQueryable();
-    //    }
-
-    //    /// <summary>
-    //    /// 根据过滤条件，获取单个实体
-    //    /// </summary>
-    //    /// <param name="whereLambda">过滤条件</param>
-    //    /// <returns>IQueryable查询对象</returns>
-    //    public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> whereLambda = null)
-    //    {
-    //        var query = Set().AsQueryable();
-    //        return query.AsNoTracking().FirstOrDefault(whereLambda);
-    //    }
-    //    /// <summary>
-    //    /// 根据过滤条件，判断是否存在数据
-    //    /// </summary>
-    //    /// <param name="whereLambda">过滤条件</param>
-    //    /// <returns>IQueryable查询对象</returns>
-    //    public bool Any(Expression<Func<TEntity, bool>> whereLambda = null)
-    //    {
-    //        var query = Set().AsQueryable();
-    //        return query.Any(whereLambda);
-    //    }
-    //    /// <summary>
-    //    /// 根据过滤条件，获取数量
-    //    /// </summary>
-    //    /// <param name="whereLambda">过滤条件</param>
-    //    /// <returns>IQueryable查询对象</returns>
-    //    public int Count(Expression<Func<TEntity, bool>> whereLambda = null)
-    //    {
-    //        var query = Set().AsQueryable();
-    //        return query.Count(whereLambda);
-    //    }
-
-
-    //    /// <summary>
-    //    /// 批量更新数据，实现按需要只更新部分更新
-    //    /// <para>如：Update(u =>u.Id==1,u =>new User{Name="ok"});</para>
-    //    /// </summary>
-    //    /// <param name="whereLambda">条件表达式：u =>u.Id==1</param>
-    //    /// <param name="updateLambda">更新表达式：u =>new User{Name="ok"}</param>
-    //    /// <returns>是否添加成功：true是，false否</returns>
-    //    public bool BatchUpdate(Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, TEntity>> updateLambda)
-    //    {
-    //        //return Set().AsQueryable().Where(whereLambda).Update(updateLambda) > -1;
-    //        return false;
-    //    }
-    //    /// <summary>
-    //    /// 批量删除数据
-    //    /// </summary>
-    //    /// <param name="whereLambda"></param>
-    //    /// <returns>是否添加成功：true是，false否</returns>
-    //    public bool BatchDelete(Expression<Func<TEntity, bool>> whereLambda)
-    //    {
-    //        //return Set().AsQueryable().Where(whereLambda).Delete() > -1;
-    //        return false;
-    //    }
-    //    #endregion
-    //    #region 分页
-    //    /// <summary>
-    //    /// 获取分页数据
-    //    /// </summary>
-    //    /// <param name="totalCount"></param>
-    //    /// <param name="pageIndex"></param>
-    //    /// <param name="pageSize">页数大小</param>
-    //    /// <param name="whereLambda"></param>
-    //    /// <param name="orderLambda">排序方式：new OrderByBuilder<TEntity, string>(a => a.UserName[,true])，true=倒序，默认false正序</param>
-    //    /// <returns></returns>
-    //    public IQueryable<TEntity> Find(out int totalCount, int pageIndex = 1, int pageSize = 10, Expression<Func<TEntity, bool>> whereLambda = null, params IOrderByBuilder<TEntity>[] orderLambda)
-    //    {
-    //        if (pageIndex < 1) pageIndex = 1;
-
-    //        var query = Set().AsQueryable();
-    //        if (whereLambda != null)
-    //        {
-    //            query = query.Where(whereLambda);
-    //        }
-    //        if (orderLambda != null)
-    //        {
-    //            query = query.OrderBy(orderLambda);
-    //        }
-
-    //        totalCount = query.Count();
-
-    //        return query.Skip(pageSize * (pageIndex - 1)).Take(pageSize);
-    //    }
-
-    //    /// <summary>
-    //    /// 获取分页数据
-    //    /// </summary>
-    //    /// <param name="totalCount"></param>
-    //    /// <param name="pageIndex"></param>
-    //    /// <param name="pageSize">页数大小</param>
-    //    /// <param name="query">linq表达式</param>
-    //    /// <returns></returns>
-    //    public IQueryable<TEntity> Find(out int totalCount, int pageIndex = 1, int pageSize = 10, IQueryable<TEntity> query = null)
-    //    {
-    //        if (query == null)
-    //        {
-    //            totalCount = 0;
-    //            return null;
-    //        }
-
-    //        totalCount = query.Count();
-
-    //        return query.Skip(pageSize * (pageIndex - 1)).Take(pageSize);
-    //    }
-
-    //    #endregion
-
-    //}
-
     public abstract class BaseRepository<T> where T : class
     {
-        private MainContext db;//数据库上下文
+        /// <summary>
+        /// 数据库上下文
+        /// </summary>
+        private MainContext _db;
 
-        public BaseRepository(MainContext _db)
+        public BaseRepository(MainContext db)
         {
-            db = _db;
+            _db = db;
         }
 
-        public virtual void Save()
-        {
-            db.SaveChanges();
-        }
+        #region 新增
 
+        /// <summary>
+        /// 添加
+        /// </summary>
+        /// <param name="entity">实体对象</param>
         public virtual void Add(T entity)
         {
-            db.Set<T>().Add(entity);
+            _db.Set<T>().Add(entity);
         }
-
-        public virtual void CloseProxy()
+        /// <summary>
+        /// 添加集合
+        /// </summary>
+        /// <param name="entity">实体对象集合</param>
+        public virtual void Add(IEnumerable<T> entities)
         {
-            db.Database.CommitTransaction();
+            foreach (var obj in entities)
+            {
+                _db.Set<T>().Attach(obj);
+                _db.Entry(obj).State = EntityState.Added;
+            }
         }
+        #endregion
 
+        #region 删除
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id">主键id</param>
+        public virtual void Delete(object id)
+        {
+            var obj = _db.Set<T>().Find(id);
+            if (obj != null)
+            {
+                _db.Set<T>().Remove(obj);
+            }
+        }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="entity">实体对象</param>
         public virtual void Delete(T entity)
         {
-            db.Set<T>().Remove(entity);
+            _db.Set<T>().Remove(entity);
         }
-
-        public virtual void Delete(System.Linq.Expressions.Expression<Func<T, bool>> where)
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="where">条件(lambda表达式)</param>
+        public virtual void Delete(Expression<Func<T, bool>> where)
         {
-            var dataList = db.Set<T>().Where(where).AsEnumerable();
-            db.Set<T>().RemoveRange(dataList);
+            var dataList = _db.Set<T>().Where(where).AsEnumerable();
+            _db.Set<T>().RemoveRange(dataList);
         }
-
-        public virtual T Get(System.Linq.Expressions.Expression<Func<T, bool>> where)
+        /// <summary>
+        /// 删除集合
+        /// </summary>
+        /// <param name="entity">实体对象集合</param>
+        public void Delete(IEnumerable<T> entities)
         {
-            return db.Set<T>().FirstOrDefault(where);
+            foreach (var obj in entities)
+            {
+                //db.Set<T>().Attach(obj);
+                _db.Entry(obj).State = EntityState.Deleted;
+            }
         }
+        #endregion
 
-        public virtual System.Linq.IQueryable<T> GetAll()
-        {
-            return db.Set<T>();
-        }
+        #region 更新
 
-        public virtual T GetById(long Id)
-        {
-            return db.Set<T>().Find(Id);
-        }
-
-        public virtual T GetById(string Id)
-        {
-            return db.Set<T>().Find(Id);
-        }
-
-        public virtual int GetCount(System.Linq.Expressions.Expression<Func<T, bool>> where)
-        {
-            return db.Set<T>().Count(where);
-        }
-
-        public virtual System.Linq.IQueryable<T> GetMany(System.Linq.Expressions.Expression<Func<T, bool>> where)
-        {
-            return db.Set<T>().Where(where);
-        }
-
-        public virtual bool IsHasValue(System.Linq.Expressions.Expression<Func<T, bool>> where)
-        {
-            return db.Set<T>().Any(where);
-        }
-
-        public virtual void OpenProxy()
-        {
-            db.Database.BeginTransaction();
-        }
-
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="entity">实体对象</param>
         public virtual void Update(T entity)
         {
-            db.Set<T>().Attach(entity);
-            db.Entry<T>(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _db.Set<T>().Attach(entity);
+            _db.Entry<T>(entity).State = EntityState.Modified;
+        }
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        /// <param name="fields">要更新的字段</param>
+        public virtual void Update(T entity, params string[] fields)
+        {
+            if (_db.Entry(entity).State == EntityState.Detached)
+            {
+                _db.Set<T>().Attach(entity);
+            }
+            if (fields != null && fields.Length > 0)
+            {
+                foreach (var field in fields)
+                {
+                    if (!string.IsNullOrEmpty(field))
+                    {
+                        _db.Entry(entity).Property(field).IsModified = true;
+                    }
+                }
+            }
+            else
+            {
+                _db.Entry(entity).State = EntityState.Modified;
+            }
+        }
+        /// <summary>
+        /// 更新集合
+        /// </summary>
+        /// <param name="entity">实体对象集合</param>
+        public virtual void Update(IEnumerable<T> entities)
+        {
+            foreach (var obj in entities)
+            {
+                _db.Set<T>().Attach(obj);
+                _db.Entry(obj).State = EntityState.Modified;
+            }
+        }
+        /// <summary>
+        /// 更新集合
+        /// </summary>
+        /// <param name="entity">实体对象集合</param>
+        /// <param name="fields">要更新的字段</param>
+        public virtual void Update(IEnumerable<T> entities, params string[] fields)
+        {
+            foreach (var obj in entities)
+            {
+                Update(obj, fields);
+            }
+        }
+        #endregion
+
+        #region 查询
+
+        /// <summary>
+        /// 根据ID获取一个对象
+        /// </summary>
+        /// <param name="id">主键ID</param>
+        /// <returns>对象</returns>
+        public virtual T FindById(object id)
+        {
+            return _db.Set<T>().Find(id);
+        }
+        /// <summary>
+        /// 根据条件获取一个对象
+        /// </summary>
+        /// <param name="where">条件(lambda表达式)</param>
+        /// <returns>对象</returns>
+        public virtual T FirstOrDefault(Expression<Func<T, bool>> where = null)
+        {
+            return _db.Set<T>().FirstOrDefault(where);
+        }
+        /// <summary>
+        /// 根据条件获取一个对象
+        /// </summary>
+        /// <param name="where">条件(lambda表达式)</param>
+        /// <param name="orderby">排序</param>
+        /// <returns></returns>
+        public T FirstOrDefault(Expression<Func<T, bool>> where = null, params IOrderByBuilder<T>[] orderby)
+        {
+            var query = _db.Set<T>().AsQueryable();
+            if (orderby != null)
+            {
+                query = query.OrderBy(orderby);
+            }
+            return query.AsNoTracking().FirstOrDefault(where);
+        }
+        /// <summary>
+        /// 获取所有数据
+        /// </summary>
+        /// <returns>所有数据</returns>
+        public virtual System.Linq.IQueryable<T> Find()
+        {
+            return _db.Set<T>();
+        }
+        /// <summary>
+        /// 根据条件获取数据
+        /// </summary>
+        /// <param name="where">条件(lambda表达式)</param>
+        /// <returns>数据</returns>
+        public virtual System.Linq.IQueryable<T> Find(Expression<Func<T, bool>> where)
+        {
+            return _db.Set<T>().Where(where);
+        }
+        /// <summary>
+        /// 获取分页数据
+        /// </summary>
+        /// <param name="totalCount"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize">页数大小</param>
+        /// <param name="where">查询条件</param>
+        /// <param name="orderby">排序方式：new OrderByBuilder TEntity string (a => a.UserName[,true])，true=倒序，默认false正序</param>
+        /// <returns></returns>
+        public IQueryable<T> Find(out int totalCount, int pageIndex = 1, int pageSize = 10, Expression<Func<T, bool>> where = null, params IOrderByBuilder<T>[] orderby)
+        {
+            if (pageIndex < 1) pageIndex = 1;
+
+            var query = _db.Set<T>().AsQueryable();
+            if (where != null)
+            {
+                query = query.Where(where);
+            }
+            if (orderby != null)
+            {
+                query = query.OrderBy(orderby);
+            }
+
+            totalCount = query.Count();
+
+            return query.Skip(pageSize * (pageIndex - 1)).Take(pageSize);
+        }
+        /// <summary>
+        /// 获取分页数据
+        /// </summary>
+        /// <param name="totalCount"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize">页数大小</param>
+        /// <param name="query">linq表达式</param>
+        /// <returns></returns>
+        public IQueryable<SEntity> Find<SEntity>(out int totalCount, int pageIndex = 1, int pageSize = 10, IQueryable<SEntity> query = null)
+        {
+            if (pageIndex < 1) pageIndex = 1;
+
+            if (query == null)
+            {
+                totalCount = 0;
+                return null;
+            }
+
+            totalCount = query.Count();
+
+            return query.Skip(pageSize * (pageIndex - 1)).Take(pageSize);
+        }
+        /// <summary>
+        /// 是否有指定条件的元素
+        /// </summary>
+        /// <param name="where">条件(lambda表达式)</param>
+        /// <returns></returns>
+        public virtual bool Any(Expression<Func<T, bool>> where = null)
+        {
+            return _db.Set<T>().Any(where);
+        }
+        /// <summary>
+        /// 根据条件获取记录数
+        /// </summary>
+        /// <param name="where">条件(lambda表达式)</param>
+        /// <returns></returns>
+        public virtual int Count(Expression<Func<T, bool>> where = null)
+        {
+            return _db.Set<T>().Count(where);
+        }
+        #endregion
+
+        #region 执行sql语句
+
+        /// <summary>
+        /// 执行SQL返回受影响行数
+        /// </summary>
+        /// <param name="SqlCommandText">SQL语句</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>受影响行数</returns>
+        public int ExecuteBySql(string SqlCommandText, params object[] parameters)
+        {
+            return ExecuteNonQuery(SqlCommandText, CommandType.Text, parameters);
+        }
+        /// <summary>
+        /// 执行存储过程返回受影响行数
+        /// </summary>
+        /// <param name="ProcName">存储过程名称</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>受影响行数</returns>
+        public int ExecuteByProc(string ProcName, params object[] parameters)
+        {
+            return ExecuteNonQuery(ProcName, CommandType.StoredProcedure, parameters);
+        }
+        /// <summary>
+        /// 执行sql查询
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="sql">sql语句</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>结果集</returns>
+        public IEnumerable<TEntity> FindBySql<TEntity>(string sql, params object[] parameters) where TEntity : new()
+        {
+            //return ExecuteQuery<TEntity>(sql, CommandType.Text, parameters);
+            return SqlQuery<TEntity>(sql, CommandType.Text, parameters);
+        }
+        /// <summary>
+        /// 执行存储过程查询
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="procName">存储过程名称</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>结果集</returns>
+        public IEnumerable<TEntity> FindByProc<TEntity>(string procName, params object[] parameters) where TEntity : new()
+        {
+            //return ExecuteQuery<TEntity>(procName, CommandType.StoredProcedure, parameters);
+            return SqlQuery<TEntity>(procName, CommandType.StoredProcedure, parameters);
+        }
+        /// <summary>
+        /// 批量新增
+        /// </summary>
+        /// <typeparam name="TEntity">泛型集合的类型</typeparam>
+        /// <param name="tableName">表名</param>
+        /// <param name="list">数据集合</param>
+        public void BulkInsert<TEntity>(IList<TEntity> list, string tableName = "")
+        {
+            if (list == null || !list.Any())
+                return;
+            if (string.IsNullOrEmpty(tableName))
+            {
+                Type t = typeof(TEntity);
+                tableName = t.Name;
+            }
+            var connection = _db.Database.GetDbConnection().ConnectionString;
+            using (var bulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.Default))
+            {
+                bulkCopy.BatchSize = list.Count;
+                bulkCopy.DestinationTableName = tableName;
+
+                var table = new DataTable();
+                var props = TypeDescriptor.GetProperties(typeof(TEntity))
+                    .Cast<PropertyDescriptor>()
+                    .Where(propertyInfo => propertyInfo.PropertyType.Namespace.Equals("System"))
+                    .ToArray();
+
+                foreach (var propertyInfo in props)
+                {
+                    bulkCopy.ColumnMappings.Add(propertyInfo.Name, propertyInfo.Name);
+                    table.Columns.Add(propertyInfo.Name, Nullable.GetUnderlyingType(propertyInfo.PropertyType) ?? propertyInfo.PropertyType);
+                }
+
+                var values = new object[props.Length];
+                foreach (var item in list)
+                {
+                    for (var i = 0; i < values.Length; i++)
+                    {
+                        values[i] = props[i].GetValue(item);
+                    }
+
+                    table.Rows.Add(values);
+                }
+
+                bulkCopy.WriteToServer(table);
+            }
+        }
+
+        ///// <summary>
+        ///// 使用SqlBulkCopy批量拷贝数据（一般使用在大量数据写入，例如：一次写入1000条）
+        ///// </summary>
+        ///// <param name="entitys"></param>
+        //public void BulkInsertCopyAll(IEnumerable<TEntity> entitys)
+        //{
+        //    if (entitys == null || entitys.Count() == 0)
+        //    {
+        //        return;
+        //    }
+        //    entitys = entitys.ToArray();
+
+        //    string cs = UnitOfWork.context.Database.Connection.ConnectionString;
+        //    using (var conn = new SqlConnection(cs))
+        //    {
+
+        //        Type t = typeof(TEntity);
+
+        //        using (var bulkCopy = new SqlBulkCopy(conn)
+        //        {
+        //            DestinationTableName = t.Name
+        //        })
+        //        {
+
+        //            var properties = t.GetProperties().Where(EventTypeFilter).ToArray();
+        //            var table = new DataTable();
+
+        //            foreach (var property in properties)
+        //            {
+        //                Type propertyType = property.PropertyType;
+        //                if (propertyType.IsGenericType &&
+        //                    propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+        //                {
+        //                    propertyType = Nullable.GetUnderlyingType(propertyType);
+        //                }
+        //                table.Columns.Add(new DataColumn(property.Name, propertyType));
+        //            }
+        //            foreach (var entity in entitys)
+        //            {
+        //                table.Rows.Add(properties.Select(
+        //                  property => GetPropertyValue(
+        //                  property.GetValue(entity, null))).ToArray());
+        //            }
+
+        //            conn.Open();
+        //            bulkCopy.WriteToServer(table);
+        //        }
+        //    }
+        //}
+        //private bool EventTypeFilter(System.Reflection.PropertyInfo p)
+        //{
+        //    var keyAttribute = Attribute.GetCustomAttribute(p,
+        //        typeof(KeyAttribute)) as KeyAttribute;
+        //    if (keyAttribute == null) return true;
+
+        //    var generatedAttribute = Attribute.GetCustomAttribute(p,
+        //      typeof(DatabaseGeneratedAttribute)) as DatabaseGeneratedAttribute;
+        //    if (generatedAttribute == null) return true;
+        //    if (generatedAttribute.DatabaseGeneratedOption != DatabaseGeneratedOption.Identity) return true;
+
+
+        //    if (!(Attribute.GetCustomAttribute(p,
+        //        typeof(AssociationAttribute)) is AssociationAttribute attribute)) return true;
+
+        //    if (attribute.IsForeignKey == false) return true;
+
+        //    return false;
+        //}
+
+        //private object GetPropertyValue(object o)
+        //{
+        //    if (o == null)
+        //        return DBNull.Value;
+        //    return o;
+        //}
+
+
+        private int ExecuteNonQuery(string sql, CommandType cmdType = CommandType.Text, params object[] parameters)
+        {
+            DbConnection connection = _db.Database.GetDbConnection();
+            DbCommand cmd = connection.CreateCommand();
+            int result = 0;
+            _db.Database.OpenConnection();
+            cmd.CommandText = sql;
+            cmd.CommandType = cmdType;
+            if (parameters != null)
+            {
+                cmd.Parameters.AddRange(parameters);
+            }
+            result = cmd.ExecuteNonQuery();
+            _db.Database.CloseConnection();
+            return result;
+        }
+        private IEnumerable<TEntity> ExecuteQuery<TEntity>(string sql, CommandType cmdType = CommandType.Text, params object[] parameters) where TEntity : new()
+        {
+            DbConnection connection = _db.Database.GetDbConnection();
+            DbCommand cmd = connection.CreateCommand();
+            _db.Database.OpenConnection();
+            cmd.CommandText = sql;
+            cmd.CommandType = cmdType;
+            if (parameters != null)
+            {
+                cmd.Parameters.AddRange(parameters);
+            }
+            DataTable dt = new DataTable();
+            using (DbDataReader reader = cmd.ExecuteReader())
+            {
+                dt.Load(reader);
+            }
+            _db.Database.CloseConnection();
+            return dt.ToEnumerable<TEntity>();
+        }
+        private IEnumerable<TEntity> SqlQuery<TEntity>(string sql, CommandType cmdType = CommandType.Text, params object[] parameters) where TEntity : new()
+        {
+            var connection = _db.Database.GetDbConnection();
+            using (var cmd = connection.CreateCommand())
+            {
+                _db.Database.OpenConnection();
+                cmd.CommandText = sql;
+                cmd.CommandType = cmdType;
+                if (parameters != null)
+                {
+                    cmd.Parameters.AddRange(parameters);
+                }
+                var dr = cmd.ExecuteReader();
+                var columnSchema = dr.GetColumnSchema();
+                var data = new List<TEntity>();
+                while (dr.Read())
+                {
+                    TEntity item = new TEntity();
+                    Type t = item.GetType();
+                    foreach (var kv in columnSchema)
+                    {
+                        var propertyInfo = t.GetProperty(kv.ColumnName);
+                        if (kv.ColumnOrdinal.HasValue && propertyInfo != null)
+                        {
+                            //注意需要转换数据库中的DBNull类型
+                            var value = dr.IsDBNull(kv.ColumnOrdinal.Value) ? null : dr.GetValue(kv.ColumnOrdinal.Value);
+                            propertyInfo.SetValue(item, value);
+                        }
+                    }
+                    data.Add(item);
+                }
+                dr.Dispose();
+                return data;
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// 保存上下文
+        /// </summary>
+        /// <returns></returns>
+        public virtual int SaveChanges()
+        {
+            try
+            {
+                return _db.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                //处理成不跟踪
+                foreach (var entry in ex.Entries)
+                {
+                    entry.State = EntityState.Detached;
+                }
+
+                throw ex;
+            }
         }
     }
 }

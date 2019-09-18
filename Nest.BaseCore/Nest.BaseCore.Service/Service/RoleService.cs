@@ -24,7 +24,7 @@ namespace Nest.BaseCore.Service
         /// <param name="requestModel">参数</param>
         public List<RoleResponseModel> GetRoleList()
         {
-            var result = _roleRepository.GetAll().Select(a => new RoleResponseModel()
+            var result = _roleRepository.Find().Select(a => new RoleResponseModel()
             {
                 Id = a.id,
                 Name = a.name

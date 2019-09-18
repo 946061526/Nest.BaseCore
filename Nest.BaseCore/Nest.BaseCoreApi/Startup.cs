@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Exceptionless;
+using log4net;
+using log4net.Config;
+using log4net.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -78,6 +81,10 @@ namespace Nest.BaseCoreApi
             //services.AddScoped<IUserService, UserService>()
             //    .AddScoped<IRoleService, RoleService>();
 
+            //初始化Net4Log
+            ILoggerRepository repository = LogManager.CreateRepository("Net4LoggerRepository");
+            XmlConfigurator.Configure(repository, new FileInfo("log4net.config"));//从log4net.config文件中读取配置信息
+
             #region AutoFac 注入仓储、业务逻辑服务
 
             //批量匹配注入，使用AutoFac提供的容器接管当前项目默认容器
@@ -96,6 +103,7 @@ namespace Nest.BaseCoreApi
             return new AutofacServiceProvider(container);
 
             #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -132,11 +140,6 @@ namespace Nest.BaseCoreApi
         /// </summary>
         public class AddAuthTokenHeaderParameter : IOperationFilter
         {
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="operation"></param>
-            /// <param name="context"></param>
             public void Apply(Operation operation, OperationFilterContext context)
             {
                 if (operation.Parameters == null) operation.Parameters = new List<IParameter>();
