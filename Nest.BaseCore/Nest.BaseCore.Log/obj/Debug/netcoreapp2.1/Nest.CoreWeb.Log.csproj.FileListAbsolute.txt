@@ -1,8 +1,0 @@
-D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Log\bin\Debug\netcoreapp2.1\Nest.CoreWeb.Log.deps.json
-D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Log\bin\Debug\netcoreapp2.1\Nest.CoreWeb.Log.dll
-D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Log\bin\Debug\netcoreapp2.1\Nest.CoreWeb.Log.pdb
-D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Log\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Log.csproj.CoreCompileInputs.cache
-D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Log\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Log.AssemblyInfoInputs.cache
-D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Log\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Log.AssemblyInfo.cs
-D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Log\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Log.dll
-D:\zzProj\Nest.CoreWeb\Nest.CoreWeb.Log\obj\Debug\netcoreapp2.1\Nest.CoreWeb.Log.pdb

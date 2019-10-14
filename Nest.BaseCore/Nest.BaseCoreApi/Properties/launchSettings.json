@@ -19,7 +19,7 @@
     },
     "Nest.CoreApi": {
       "commandName": "Project",
-      "launchUrl": "index.html",
+      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
