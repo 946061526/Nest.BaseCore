@@ -71,7 +71,7 @@ namespace Nest.BaseCoreApi
 
             services.AddMvc(options =>
             {
-                options.Filters.Add<GlobalExceptionFilterAttribute>();//统一异常处理
+                options.Filters.Add<GlobalExceptionAttribute>();//统一异常处理
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             //注入Logger服务

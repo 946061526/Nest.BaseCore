@@ -25,6 +25,18 @@ namespace Nest.BaseCore.Common
         private static Regex _numericregex = new Regex(@"^[-]?[0-9]+(\.[0-9]+)?$");
         //邮政编码正则表达式
         private static Regex _zipcoderegex = new Regex(@"^\d{6}$");
+        //密码正则表达式（数字,字母,字符至少两种且不能少于8个字符）
+        private static Regex _passwordregex = new Regex(@"^((?=.*\d)(?=.*\D)|(?=.*[a-zA-Z])(?=.*[^a-zA-Z]))(?!^.*[\u4E00-\u9FA5].*$)^\S{8,50}$");
+
+        /// <summary>
+        /// 是否为符合要求的密码（数字,字母,字符至少两种且不能少于8个字符）
+        /// </summary>
+        public static bool IsPassword(this string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return false;
+            return _passwordregex.IsMatch(s);
+        }
 
         /// <summary>
         /// 是否为邮箱名

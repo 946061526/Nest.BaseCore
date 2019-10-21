@@ -17,62 +17,63 @@ namespace Nest.BaseCore.Cache
 
         #region 链接配置
 
-        /// <summary>
-        /// Redis服务器ip
-        /// </summary>
-        public static string RedisHost
-        {
-            get
-            {
-                try
-                {
-                    return AppSettingsHelper.Configuration["RedisConfig:Host"];
-                }
-                catch
-                {
-                    return "127.0.0.1";
-                }
-            }
-        }
+        ///// <summary>
+        ///// Redis服务器ip
+        ///// </summary>
+        //public static string RedisHost
+        //{
+        //    get
+        //    {
+        //        try
+        //        {
+        //            return AppSettingsHelper.Configuration["RedisConfig:Host"];
+        //        }
+        //        catch
+        //        {
+        //            return "127.0.0.1";
+        //        }
+        //    }
+        //}
 
-        /// <summary>
-        /// Redis服务器端口
-        /// </summary>
-        public static int RedisPort
-        {
-            get
-            {
-                try
-                {
-                    return int.Parse(AppSettingsHelper.Configuration["RedisConfig:Port"]);
-                }
-                catch
-                {
-                    return 6379;
-                }
-            }
-        }
+        ///// <summary>
+        ///// Redis服务器端口
+        ///// </summary>
+        //public static int RedisPort
+        //{
+        //    get
+        //    {
+        //        try
+        //        {
+        //            return int.Parse(AppSettingsHelper.Configuration["RedisConfig:Port"]);
+        //        }
+        //        catch
+        //        {
+        //            return 6379;
+        //        }
+        //    }
+        //}
 
-        /// <summary>
-        /// Redis密码
-        /// </summary>
-        public static string RedisPassword
-        {
-            get
-            {
-                try
-                {
-                    return AppSettingsHelper.Configuration["RedisConfig:Pass"];
+        ///// <summary>
+        ///// Redis密码
+        ///// </summary>
+        //public static string RedisPassword
+        //{
+        //    get
+        //    {
+        //        try
+        //        {
+        //            return AppSettingsHelper.Configuration["RedisConfig:Pass"];
 
-                }
-                catch
-                {
-                    return string.Empty;
-                }
-            }
-        }
+        //        }
+        //        catch
+        //        {
+        //            return string.Empty;
+        //        }
+        //    }
+        //}
         #endregion
 
+        private static RedisConfig _redisConfig;
         private static ConnectionMultiplexer _instance;
         private static readonly object _redisLock = new object();
         /// <summary>
@@ -84,6 +85,11 @@ namespace Nest.BaseCore.Cache
             {
                 try
                 {
+                    if (_redisConfig == null)
+                    {
+                        _redisConfig = AppSettingsHelper.GetAppSettings<RedisConfig>("RedisConfig");//读取配置文件
+                    }
+
                     if (_instance == null || !_instance.IsConnected)
                     {
                         lock (_redisLock)
@@ -91,9 +97,11 @@ namespace Nest.BaseCore.Cache
                             var configurationOptions = new ConfigurationOptions
                             {
                                 //AbortOnConnectFail = false,
-                                Password = RedisPassword,
+                                //Password = RedisPassword,
+                                Password = _redisConfig.Pass
                             };
-                            configurationOptions.EndPoints.Add(new DnsEndPoint(RedisHost, RedisPort));
+                            //configurationOptions.EndPoints.Add(new DnsEndPoint(RedisHost, RedisPort));
+                            configurationOptions.EndPoints.Add(new DnsEndPoint(_redisConfig.Host, _redisConfig.Port));
                             _instance = ConnectionMultiplexer.Connect(configurationOptions);
 
                             //注册如下事件
@@ -118,7 +126,7 @@ namespace Nest.BaseCore.Cache
         /// <summary>
         /// 获取实例
         /// </summary>
-        public static ConnectionMultiplexer GetInstance(string serverHost, int serverPort = 6379, string serverPassword = "258369")
+        public static ConnectionMultiplexer GetInstance(string serverHost, int serverPort = 6379, string serverPassword = "")
         {
             try
             {
@@ -766,5 +774,15 @@ namespace Nest.BaseCore.Cache
             return await db.ListLeftPushAsync(redisKey, JsonHelper.SerializeObject(redisValue));
         }
         #endregion
+    }
+
+    /// <summary>
+    /// Redis配置类
+    /// </summary>
+    public class RedisConfig
+    {
+        public string Host { get; set; }
+        public int Port { get; set; }
+        public string Pass { get; set; }
     }
 }

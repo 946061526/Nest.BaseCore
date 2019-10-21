@@ -6,8 +6,8 @@ namespace Nest.BaseCore.Common
 {
     public class OrderByBuilder<TEntity, TOrderBy> : IOrderByBuilder<TEntity> where TEntity : class
     {
-        private Expression<Func<TEntity, TOrderBy>> _expression;
-        private bool _descending;
+        private readonly Expression<Func<TEntity, TOrderBy>> _expression;
+        private readonly bool _descending;
 
         public OrderByBuilder(Expression<Func<TEntity, TOrderBy>> expression, bool descending = false)
         {

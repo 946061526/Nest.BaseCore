@@ -17,6 +17,16 @@
             return $"token_{token}";
         }
 
+        /// <summary>
+        /// 缓存车辆路径
+        /// </summary>
+        /// <param name="carNo">车牌</param>
+        /// <param name="direction">行驶方向0上学1放学</param>
+        /// <returns></returns>
+        public static string GetCarPath(string carNo,int direction)
+        {
+            return $"CarPath_{carNo}_{direction}";
+        }
         #endregion
     }
 }

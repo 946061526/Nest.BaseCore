@@ -11,7 +11,7 @@ namespace Nest.BaseCore.Common
     /// </summary>
     public class AESHelper
     {
-        private static string _key = "5a4009a2847940029dabb536b68838ac";
+        private static readonly string _key = "5a4009a2847940029dabb536b68838ac";
 
         /// <summary>
         /// AES加密

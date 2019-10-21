@@ -7,9 +7,14 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
+    <PackageReference Include="Senparc.Weixin" Version="6.2.1" />
+    <PackageReference Include="Senparc.Weixin.MP" Version="16.5.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="ChnCharInfo">
+      <HintPath>..\resource\外部dll\ChnCharInfo.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Configuration">
       <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
     </Reference>

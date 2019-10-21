@@ -12,16 +12,16 @@ namespace Nest.BaseCore.Common
     /// </summary>
     public static class AutoMapperExt
     {
-        ///// <summary>
-        /////  类型映射
-        ///// </summary>
-        //public static TDestination MapTo<TDestination>(this object source)
-        //{
-        //    if (source == null) return default(TDestination);
+        /// <summary>
+        ///  类型映射
+        /// </summary>
+        public static TDestination MapTo<TDestination>(this object source)
+        {
+            if (source == null) return default(TDestination);
 
-        //    var mapper = new MapperConfiguration(a => a.CreateMap(source.GetType(), typeof(TDestination))).CreateMapper();
-        //    return mapper.Map<TDestination>(source);
-        //}
+            var mapper = new MapperConfiguration(a => a.CreateMap(source.GetType(), typeof(TDestination))).CreateMapper();
+            return mapper.Map<TDestination>(source);
+        }
 
         /// <summary>
         /// 集合列表类型映射

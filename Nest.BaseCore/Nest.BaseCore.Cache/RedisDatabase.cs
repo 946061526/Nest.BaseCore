@@ -56,27 +56,7 @@ namespace Nest.BaseCore.Cache
             {
                 return RedisClient.Instance.GetDatabase(4);
             }
-        }
-        /// <summary>
-        /// 宿舍服务库, db5
-        /// </summary>
-        public static IDatabase DB_DormitoryService
-        {
-            get
-            {
-                return RedisClient.Instance.GetDatabase(5);
-            }
-        }
-        /// <summary>
-        /// 大门服务库, db6
-        /// </summary>
-        public static IDatabase DB_GateService
-        {
-            get
-            {
-                return RedisClient.Instance.GetDatabase(6);
-            }
-        }
+        }        
         /// <summary>
         /// 请假服务库, db7
         /// </summary>

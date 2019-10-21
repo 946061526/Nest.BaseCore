@@ -22,7 +22,7 @@ namespace Nest.BaseCore.Common
             {
                 var value = md5.ComputeHash(Encoding.ASCII.GetBytes(str));
                 var result = BitConverter.ToString(value);
-                return result.Replace("-", "");
+                return result.ToLower().Replace("-", "");
             }
         }
 
@@ -37,7 +37,7 @@ namespace Nest.BaseCore.Common
             {
                 var value = md5.ComputeHash(stream);
                 var result = BitConverter.ToString(value);
-                return result.Replace("-", "");
+                return result.ToLower().Replace("-", "");
             }
         }
 

@@ -10,21 +10,21 @@ namespace Nest.BaseCore.Common
     /// </summary>
     public class BaseRequestModel
     {
-        /// <summary>
-        /// 时间戳
-        /// </summary>
-        [Required]
-        public string Timestamp { get; set; }
-        /// <summary>
-        /// 随机字符串
-        /// </summary>
-        [Required]
-        public string Nonce { get; set; }
-        /// <summary>
-        /// 签名
-        /// </summary>
-        [Required]
-        public string Signature { get; set; }
+        ///// <summary>
+        ///// 时间戳
+        ///// </summary>
+        //[Required]
+        //public string Timestamp { get; set; }
+        ///// <summary>
+        ///// 随机字符串
+        ///// </summary>
+        //[Required]
+        //public string Nonce { get; set; }
+        ///// <summary>
+        ///// 签名
+        ///// </summary>
+        //[Required]
+        //public string Signature { get; set; }
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Nest.BaseCore.Common
     }
 
     /// <summary>
-    /// 分页关键字基本请求参数模型
+    /// 分页关键字基本参数模型
     /// </summary>
-    public class BasePageKeywordRequestModel : BasePageRequestModel
+    public class BasePageKeywordModel : BasePageRequestModel
     {
         /// <summary>
         /// 搜索关键字
@@ -56,48 +56,68 @@ namespace Nest.BaseCore.Common
     }
 
     /// <summary>
-    /// 字符串Id基本请求参数模型
+    /// 字符串Id基本参数模型
     /// </summary>
-    public class BaseStringIdRequestModel : BaseRequestModel
+    public class BaseIdModel : BaseRequestModel
     {
         /// <summary>
         /// 字符串Id
         /// </summary>
-        [Required]
         public string Id { get; set; } = "";
     }
 
     /// <summary>
-    /// 整形Id基本请求参数模型
+    /// 微信手机号模型
     /// </summary>
-    public class BaseIntIdRequestModel : BaseRequestModel
+    public class WechatModel
     {
         /// <summary>
-        /// 整形Id
+        /// 手机号
         /// </summary>
-        [Required]
-        public int Id { get; set; } = 0;
+        [Display(Name = "手机号")]
+        public string Phone { get; set; }
+
+        /// <summary>
+        /// 类型:1教师/2家长
+        /// </summary>
+        [Display(Name = "类型")]
+        public int Type { get; set; }
     }
 
-    ///// <summary>
-    ///// Api授权请求参数实体
-    ///// </summary>
-    //public class ApiAuthorizeRequestModel : ApiBaseRequestModel
-    //{
-    //    /// <summary>
-    //    /// 应用号
-    //    /// </summary>
-    //    [Required]
-    //    public string AppId { get; set; }
-    //    /// <summary>
-    //    /// 请求设备号（设备唯一标识符uuid）
-    //    /// </summary>
-    //    [Required]
-    //    public string DeviceNo { get; set; }
-    //    /// <summary>
-    //    /// 客户端类型(必须与AppId一致)
-    //    /// </summary>
-    //    [Required]
-    //    public string ClientType { get; set; }
-    //}
+    /// <summary>
+    /// 微信OpenId模型
+    /// </summary>
+    public class WechatOpenIdModel
+    {
+        /// <summary>
+        /// 微信用户Id
+        /// </summary>
+        [Display(Name = "微信用户Id")]
+        public string OpenId { get; set; }
+
+        /// <summary>
+        /// 类型:1教师/2家长
+        /// </summary>
+        [Display(Name = "类型")]
+        public int Type { get; set; }
+    }
+
+    /// <summary>
+    /// 微信绑定模型
+    /// </summary>
+    public class WechatPwdModel
+    {
+        /// <summary>
+        /// 手机号
+        /// </summary>
+        [Display(Name = "手机号")]
+        public string Phone { get; set; }
+
+        /// <summary>
+        /// 绑定密码
+        /// </summary>
+        [Display(Name = "绑定密码")]
+        public string Pwd { get; set; }
+    }
+
 }

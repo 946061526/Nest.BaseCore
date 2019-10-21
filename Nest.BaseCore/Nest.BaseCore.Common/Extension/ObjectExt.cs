@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Nest.BaseCore.Common
 {
@@ -97,7 +98,7 @@ namespace Nest.BaseCore.Common
             {
                 return Convert.ToInt32(obj);
             }
-            catch (Exception ex)
+            catch
             {
                 return defaultValue;
             }
@@ -128,7 +129,7 @@ namespace Nest.BaseCore.Common
             {
                 return Convert.ToDateTime(obj);
             }
-            catch (Exception ex)
+            catch
             {
                 return defaultValue;
             }
@@ -201,5 +202,28 @@ namespace Nest.BaseCore.Common
             return str;
         }
 
+        #region List转Tree
+        /// <summary>
+        /// List转Tree
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="K"></typeparam>
+        /// <param name="collection">List集合</param>
+        /// <param name="idSelector">当前ID</param>
+        /// <param name="parentIdSelector">父级ID</param>
+        /// <param name="rootId">根节点</param>
+        /// <returns>树形结果项</returns>
+        public static IEnumerable<TreeItem<T>> ToTree<T, K>(this IEnumerable<T> collection, Func<T, K> idSelector, Func<T, K> parentIdSelector, K rootId = default(K))
+        {
+            foreach (var c in collection.Where(c => parentIdSelector(c).Equals(rootId)))
+            {
+                yield return new TreeItem<T>
+                {
+                    Item = c,
+                    Children = collection.ToTree(idSelector, parentIdSelector, idSelector(c))
+                };
+            }
+        }
+        #endregion
     }
 }

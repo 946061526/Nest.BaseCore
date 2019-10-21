@@ -7,43 +7,13 @@ using System.Net;
 
 namespace Nest.BaseCore.Aop
 {
-    ///// <summary>
-    ///// 统一异常处理
-    ///// </summary>
-    //public class GlobalExceptionFilterAttribute : ExceptionFilterAttribute
-    //{
-    //    private readonly IExceptionlessLogger _exceptionlessLogger;
-    //    public GlobalExceptionFilterAttribute(IExceptionlessLogger exceptionlessLogger)
-    //    {
-    //        _exceptionlessLogger = exceptionlessLogger;
-    //    }
-
-    //    public override void OnException(ExceptionContext context)
-    //    {
-    //        ApiResultModel<string> apiResult = null;
-    //        var ex = context.Exception;
-    //        if (ex != null)
-    //        {
-    //            apiResult = new ApiResultModel<string>() { Code = ApiResultCode.Exception, Msg = ex.Message };
-    //            context.Result = new JsonResult(apiResult);
-    //            context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-    //            context.ExceptionHandled = true;
-
-    //            //日志
-    //            Net4Logger.Error(context.HttpContext.Request.Path, ex.Message, ex);
-    //            //_exceptionlessLogger.Error(context.HttpContext.Request.Path, ex.Message, "");
-    //        }
-    //        base.OnException(context);
-    //    }
-    //}
-
     /// <summary>
     /// 统一异常处理
     /// </summary>
-    public class GlobalExceptionFilterAttribute : IExceptionFilter
+    public class GlobalExceptionAttribute : IExceptionFilter
     {
         private readonly IExceptionlessLogger _exceptionlessLogger;
-        public GlobalExceptionFilterAttribute(IExceptionlessLogger exceptionlessLogger)
+        public GlobalExceptionAttribute(IExceptionlessLogger exceptionlessLogger)
         {
             _exceptionlessLogger = exceptionlessLogger;
         }
@@ -54,14 +24,14 @@ namespace Nest.BaseCore.Aop
             var ex = context.Exception;
             if (ex != null)
             {
-                apiResult = new ApiResultModel<string>() { Code = ApiResultCode.Exception, Msg = ex.Message };
+                apiResult = new ApiResultModel<string>() { Code = ApiResultCode.Exception, Message = ex.Message };
                 context.Result = new JsonResult(apiResult);
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 context.ExceptionHandled = true;
 
                 //日志
-                //Net4Logger.Error(context.HttpContext.Request.Path, ex.Message, ex);
-                _exceptionlessLogger.Error(context.HttpContext.Request.Path, ex.Message, "");
+                Net4Logger.Error(context.HttpContext.Request.Path, ex.Message, ex);
+                //_exceptionlessLogger.Error(context.HttpContext.Request.Path, ex.Message, "");
             }
         }
     }

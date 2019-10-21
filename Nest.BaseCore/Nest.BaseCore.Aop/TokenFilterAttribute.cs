@@ -14,14 +14,8 @@ namespace Nest.BaseCore.Aop
     /// <summary>
     /// 用户登录Token认证
     /// </summary>
-    public class TokenFilterAttribute : ActionFilterAttribute
+    public class TokenAttribute : ActionFilterAttribute
     {
-        //private IExceptionlessLogger _exceptionlessLogger;
-        //public TokenFilterAttribute(IExceptionlessLogger exceptionlessLogger)
-        //{
-        //    _exceptionlessLogger = exceptionlessLogger;
-        //}
-
         /// <summary>
         /// 方法执行前
         /// </summary>
@@ -62,7 +56,6 @@ namespace Nest.BaseCore.Aop
 
                     //日志
                     Net4Logger.Error(path, "非法请求(无token)");
-                    //_exceptionlessLogger.Error(path, "非法请求(无token)", "");
                 }
             }
             base.OnActionExecuting(context);

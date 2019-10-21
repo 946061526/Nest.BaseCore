@@ -28,15 +28,7 @@ namespace Nest.BaseCore.Common
             {
                 return string.Empty;
             }
-            DescriptionAttribute descAttr = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
-            if (descAttr == null)
-            {
-                return string.Empty;
-            }
-            else
-            {
-                return descAttr.Description;
-            }
+            return !(Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) is DescriptionAttribute descAttr) ? string.Empty : descAttr.Description;
         }
         /// <summary>
         /// 获取对象的特性

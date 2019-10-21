@@ -10,6 +10,11 @@ namespace Nest.BaseCore.Common
     /// </summary>
     public static class StringExt
     {
+        public static bool IsNullOrEmpty(this string value)
+        {
+            return string.IsNullOrEmpty(value);
+        }
+
         /// <summary>
         /// 字符串转数组
         /// </summary>
@@ -73,7 +78,7 @@ namespace Nest.BaseCore.Common
         /// <returns></returns>
         public static string ToImageUrl(this string input, DefaultImageEnum defaultImageEnum = DefaultImageEnum.DefaultImage)
         {
-            var imgSaveService = AppSettingsHelper.Configuration["ImageUploadConfig:SaveService"];
+            var imgSaveService = AppSettingsHelper.Configuration["ImageUploadConfig:UploadService"];
             if (string.IsNullOrEmpty(input))//输入url为空
             {
                 if (defaultImageEnum == DefaultImageEnum.None)
