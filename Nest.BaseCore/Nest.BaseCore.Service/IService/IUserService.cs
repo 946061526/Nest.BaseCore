@@ -26,5 +26,7 @@ namespace Nest.BaseCore.Service
         int Update();
 
         void Query();
+
+        void Delete();
     }
 }

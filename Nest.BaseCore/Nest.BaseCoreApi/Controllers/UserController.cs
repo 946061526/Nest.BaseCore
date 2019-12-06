@@ -42,13 +42,13 @@ namespace Nest.BaseCoreApi.Controllers
         /// <summary>
         /// 查询用户
         /// </summary>
-        /// <param name="requestModel">参数</param>
         [HttpPost]
         [Route("GetUserList")]
         public ApiResultModel<List<LoginResponseModel>> GetUserList()
         {
             var result = new ApiResultModel<List<LoginResponseModel>>();
             result.Data = _userService.GetUserList();
+            result.Code = ApiResultCode.Success;
             return result;
         }
 
@@ -59,13 +59,6 @@ namespace Nest.BaseCoreApi.Controllers
             var i = _userService.Add(new BaseCore.Domain.User());
         }
 
-        [HttpPost]
-        [Route("AddList")]
-        public void AddList()
-        {
-            var i = _userService.Add(new List<BaseCore.Domain.User>());
-
-        }
         [HttpPost]
         [Route("Update")]
         public void Update()
@@ -80,5 +73,11 @@ namespace Nest.BaseCoreApi.Controllers
             _userService.Query();
         }
 
+        [HttpPost]
+        [Route("Delete")]
+        public void Delete()
+        {
+            _userService.Delete();
+        }
     }
 }

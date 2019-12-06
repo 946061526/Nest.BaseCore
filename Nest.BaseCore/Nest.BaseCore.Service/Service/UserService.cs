@@ -76,7 +76,23 @@ namespace Nest.BaseCore.Service
                 roleId = "1"
             };
             _userRepository.Add(user);
-            return _userRepository.SaveChanges();
+            var i = _userRepository.SaveChanges();
+
+            var users = new List<User>();
+            users.Add(user);
+            user = new User()
+            {
+                id = GuidTool.GetGuid(),
+                name = "jay",
+                userName = "jay",
+                password = "123",
+                roleId = "1"
+            };
+            users.Add(user);
+            _userRepository.Add(users);
+            i = _userRepository.SaveChanges();
+
+            return i;
         }
         public int Add(List<User> t)
         {
@@ -144,9 +160,26 @@ namespace Nest.BaseCore.Service
             var c = _userRepository.Count();
             c = _userRepository.Count(x => x.userName == "admin");
 
+        }
 
+        public void Delete()
+        {
+            _userRepository.Delete("2");
+            var i = _userRepository.SaveChanges();
 
+            User user = new User()
+            {
+                id = "2",
+                name = "Karroy",
+                userName = "Karroy",
+                password = "123",
+                roleId = "1"
+            };
+            _userRepository.Add(user);
+            i = _userRepository.SaveChanges();
 
+            _userRepository.Delete(x => x.id == "22");
+            i = _userRepository.SaveChanges();
         }
 
     }

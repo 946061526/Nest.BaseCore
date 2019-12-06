@@ -203,16 +203,4 @@ namespace Nest.BaseCore.Common
         /// </summary>
         public int TotalCount { get; set; } = 0;
     }
-
-    ///// <summary>
-    ///// 返回结果（分页）
-    ///// </summary>
-    ///// <typeparam name="T"></typeparam>
-    //public class ApiPagedResultModel<T> : ApiResultModel<IEnumerable<T>>
-    //{
-    //    /// <summary>
-    //    /// 数据总行数
-    //    /// </summary>
-    //    public int TotalCount { get; set; }
-    //}
 }
