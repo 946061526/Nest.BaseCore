@@ -72,5 +72,13 @@ namespace Nest.BaseCoreApi.Controllers
         {
             _userService.Update();
         }
+
+        [HttpPost]
+        [Route("Query")]
+        public void Query()
+        {
+            _userService.Query();
+        }
+
     }
 }

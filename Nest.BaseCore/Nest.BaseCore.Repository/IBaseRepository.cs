@@ -122,7 +122,7 @@ namespace Nest.BaseCore.Repository
         /// <param name="pageSize">页数大小</param>
         /// <param name="query">linq表达式</param>
         /// <returns></returns>
-        IQueryable<SEntity> Find<SEntity>(out int totalCount, int pageIndex = 1, int pageSize = 10, IQueryable<SEntity> query = null);
+        IQueryable<SEntity> Find<SEntity>(IQueryable<SEntity> query, out int totalCount, int pageIndex = 1, int pageSize = 10);
         /// <summary>
         /// 是否有指定条件的元素
         /// </summary>

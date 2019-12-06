@@ -87,11 +87,13 @@ namespace Nest.BaseCore.Repository
         /// <param name="entity">实体对象集合</param>
         public void Delete(IEnumerable<T> entities)
         {
-            foreach (var obj in entities)
-            {
-                //db.Set<T>().Attach(obj);
-                _db.Entry(obj).State = EntityState.Deleted;
-            }
+            //foreach (var obj in entities)
+            //{
+            //    //db.Set<T>().Attach(obj);
+            //    _db.Entry(obj).State = EntityState.Deleted;
+            //}
+
+            _db.Set<T>().RemoveRange(entities);
         }
         #endregion
 
@@ -176,7 +178,11 @@ namespace Nest.BaseCore.Repository
         /// <returns>对象</returns>
         public virtual T FirstOrDefault(Expression<Func<T, bool>> where = null)
         {
-            return _db.Set<T>().FirstOrDefault(where);
+            if (where == null)
+            {
+                return _db.Set<T>().AsNoTracking().FirstOrDefault();
+            }
+            return _db.Set<T>().AsNoTracking().FirstOrDefault(where);
         }
         /// <summary>
         /// 根据条件获取一个对象
@@ -186,12 +192,16 @@ namespace Nest.BaseCore.Repository
         /// <returns></returns>
         public T FirstOrDefault(Expression<Func<T, bool>> where = null, params IOrderByBuilder<T>[] orderby)
         {
-            var query = _db.Set<T>().AsQueryable();
+            var query = _db.Set<T>().AsNoTracking();
+            if (where != null)
+            {
+                query = query.Where(where);
+            }
             if (orderby != null)
             {
                 query = query.OrderBy(orderby);
             }
-            return query.AsNoTracking().FirstOrDefault(where);
+            return query.FirstOrDefault();
         }
         /// <summary>
         /// 获取所有数据
@@ -199,7 +209,7 @@ namespace Nest.BaseCore.Repository
         /// <returns>所有数据</returns>
         public virtual System.Linq.IQueryable<T> Find()
         {
-            return _db.Set<T>();
+            return _db.Set<T>().AsNoTracking();
         }
         /// <summary>
         /// 根据条件获取数据
@@ -208,7 +218,7 @@ namespace Nest.BaseCore.Repository
         /// <returns>数据</returns>
         public virtual System.Linq.IQueryable<T> Find(Expression<Func<T, bool>> where)
         {
-            return _db.Set<T>().Where(where);
+            return _db.Set<T>().AsNoTracking().Where(where);
         }
         /// <summary>
         /// 获取分页数据
@@ -223,7 +233,7 @@ namespace Nest.BaseCore.Repository
         {
             if (pageIndex < 1) pageIndex = 1;
 
-            var query = _db.Set<T>().AsQueryable();
+            var query = _db.Set<T>().AsNoTracking();
             if (where != null)
             {
                 query = query.Where(where);
@@ -245,7 +255,7 @@ namespace Nest.BaseCore.Repository
         /// <param name="pageSize">页数大小</param>
         /// <param name="query">linq表达式</param>
         /// <returns></returns>
-        public IQueryable<SEntity> Find<SEntity>(out int totalCount, int pageIndex = 1, int pageSize = 10, IQueryable<SEntity> query = null)
+        public IQueryable<SEntity> Find<SEntity>(IQueryable<SEntity> query, out int totalCount, int pageIndex = 1, int pageSize = 10)
         {
             if (pageIndex < 1) pageIndex = 1;
 
@@ -266,7 +276,11 @@ namespace Nest.BaseCore.Repository
         /// <returns></returns>
         public virtual bool Any(Expression<Func<T, bool>> where = null)
         {
-            return _db.Set<T>().Any(where);
+            if (where == null)
+            {
+                return _db.Set<T>().AsEnumerable().Any();
+            }
+            return _db.Set<T>().Where(where).AsEnumerable().Any();
         }
         /// <summary>
         /// 根据条件获取记录数
@@ -275,6 +289,10 @@ namespace Nest.BaseCore.Repository
         /// <returns></returns>
         public virtual int Count(Expression<Func<T, bool>> where = null)
         {
+            if (where == null)
+            {
+                return _db.Set<T>().Count();
+            }
             return _db.Set<T>().Count(where);
         }
         #endregion

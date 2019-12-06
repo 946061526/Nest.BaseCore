@@ -108,21 +108,46 @@ namespace Nest.BaseCore.Service
             var user = _userRepository.FirstOrDefault(x => x.userName == "Karroy1");
             user.password = "";
             _userRepository.Update(user);
-            var i=_userRepository.SaveChanges();
+            var i = _userRepository.SaveChanges();
 
+            user.password = "123";
+            user.name = "jay";
+            _userRepository.Update(user, "password", "name");
+            i = _userRepository.SaveChanges();
 
-            var list = _userRepository.Find(x => x.password == "123").ToList();
+            var list = _userRepository.Find().ToList();
             list.ForEach(item =>
             {
-                item.password = "";
+                item.password = "d33f1a6621f17e8090f8fb9c1b6b6f01";
             });
-             _userRepository.Update(list);
+            _userRepository.Update(list, "password");
 
             i = _userRepository.SaveChanges();
 
             return i;
         }
 
+        public void Query()
+        {
+            var u = _userRepository.FindById("2");
+            u = _userRepository.FirstOrDefault();
+            u = _userRepository.FirstOrDefault(x => x.id == "1");
+            u = _userRepository.FirstOrDefault(x => x.id != "001cb07a8f4f49af9ccac6d5a96be07e", null);
+
+            var list = _userRepository.Find().ToList();
+            list = _userRepository.Find(x => x.userName == "").ToList();
+            list = _userRepository.Find(out int total, 1, 2).ToList();
+
+            var b = _userRepository.Any(x => x.password == "d33f1a6621f17e8090f8fb9c1b6b6f01");
+            b = _userRepository.Any();
+
+            var c = _userRepository.Count();
+            c = _userRepository.Count(x => x.userName == "admin");
+
+
+
+
+        }
 
     }
 }

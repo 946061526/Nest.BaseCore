@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Nest.BaseCore.Repository
 {
+    /// <summary>
+    /// 用户仓储
+    /// </summary>
     public interface IUserRepository : IBaseRepository<User>
     {
 

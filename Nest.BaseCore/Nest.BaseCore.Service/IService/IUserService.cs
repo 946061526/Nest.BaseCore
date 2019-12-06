@@ -24,5 +24,7 @@ namespace Nest.BaseCore.Service
         int Add(List<User> users);
 
         int Update();
+
+        void Query();
     }
 }
