@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Nest.BaseCore.Domain
 {
@@ -21,6 +18,16 @@ namespace Nest.BaseCore.Domain
         /// 角色表
         /// </summary>
         public DbSet<Role> Role { get; set; }
+
+        /// <summary>
+        /// 角色权限表
+        /// </summary>
+        public DbSet<tbRoleMenu> RoleMenu { get; set; }
+
+        /// <summary>
+        /// 角色权限表
+        /// </summary>
+        public DbSet<tbMenu> Menu { get; set; }
 
         ////对 DbContext 指定单数的表名来覆盖默认的表名
         //protected override void OnModelCreating(ModelBuilder modelBuilder)

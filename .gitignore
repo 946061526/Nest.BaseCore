@@ -22,3 +22,8 @@
 /Nest.BaseCore/Nest.BaseCoreWeb/obj
 /Nest.BaseCore/UnitTestProject1/bin
 /Nest.BaseCore/UnitTestProject1/obj
+/Nest.BaseCore/Nest.BaseCoreWeb/Log
+/Nest.BaseCore/Nest.BaseCoreWeb/*.user
+/Nest.BaseCore/Nest.BaseCoreApi/Log/LogDebug/*.log
+/Nest.BaseCore/Nest.BaseCoreApi/Log/LogError/*.log
+/Nest.BaseCore/Nest.BaseCoreApi/Log/LogInfo/*.log

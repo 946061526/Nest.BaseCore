@@ -15,29 +15,21 @@ namespace Nest.BaseCoreWeb.Controllers
             return View();
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
+        public ActionResult Welcome()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        /// <summary>
+        /// 默认错误页面
+        /// </summary>
+        /// <param name="msg">错误消息</param>
+        /// <returns></returns>
+        public ActionResult Error(string msg)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            //msg = string.IsNullOrEmpty(msg) ? "" : UrlEncoder.Default.UrlDecode(msg) HttpContext.Server.UrlDecode(msg);
+            ViewBag.Message = msg;
+            return View();
         }
     }
 }
