@@ -137,7 +137,7 @@ namespace Nest.BaseCore.Service
                             Path = m.path,
                             Icon = m.icon,
                             Sort = m.sort,
-                            Type = m.type
+                            Type = (MenuTypeEnum)m.type
                         }).ToList();
 
             result.Data = list.Any() ? list : new List<MenuResponseModel>();

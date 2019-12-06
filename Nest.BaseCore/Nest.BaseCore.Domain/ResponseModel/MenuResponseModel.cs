@@ -44,7 +44,7 @@ namespace Nest.BaseCore.Domain.ResponseModel
         /// <summary>
         /// 菜单类型 1模块/2功能/3操作
         /// </summary>
-        public int Type { get; set; }
+        public MenuTypeEnum Type { get; set; }
 
         /// <summary>
         /// 排序
