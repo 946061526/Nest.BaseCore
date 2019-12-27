@@ -9,7 +9,7 @@ namespace Nest.BaseCore.Domain
     /// <summary>
     /// 角色表
     /// </summary>
-    [Table("tbRole")]
+    [Table("Role")]
     public class Role
     {
         [Key]

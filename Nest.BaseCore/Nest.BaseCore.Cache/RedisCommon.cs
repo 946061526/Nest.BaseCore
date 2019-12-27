@@ -14,18 +14,17 @@
         /// <returns></returns>
         public static string GetTokenKey(string token)
         {
-            return $"token_{token}";
+            return $"token:{token}";
         }
 
         /// <summary>
-        /// 缓存车辆路径
+        /// 秘钥缓存key
         /// </summary>
-        /// <param name="carNo">车牌</param>
-        /// <param name="direction">行驶方向0上学1放学</param>
+        /// <param name="str">AppId等加密串</param>
         /// <returns></returns>
-        public static string GetCarPath(string carNo,int direction)
+        public static string GetSecretKey(string str)
         {
-            return $"CarPath_{carNo}_{direction}";
+            return $"secret:{str}";
         }
         #endregion
     }

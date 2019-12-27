@@ -34,22 +34,22 @@ namespace UnitTestProject1
         [TestMethod]
         public void Add()
         {
-            var user = new User()
+            var user = new UserInfo()
             {
-                id = GuidTool.GetGuid(),
-                name = "Karroy",
-                userName = "Karroy"
+                Id = GuidTool.GetGuid(),
+                RealName = "Karroy",
+                UserName = "Karroy"
             };
             var i = _userService.Add(user);
 
 
-            List<User> users = new List<User>();
+            List<UserInfo> users = new List<UserInfo>();
             users.Add(user);
-            user = new User()
+            user = new UserInfo()
             {
-                id = GuidTool.GetGuid(),
-                name = "jay",
-                userName = "jay"
+                Id = GuidTool.GetGuid(),
+                RealName = "jay",
+                UserName = "jay"
             };
             users.Add(user);
             i = _userService.Add(users);

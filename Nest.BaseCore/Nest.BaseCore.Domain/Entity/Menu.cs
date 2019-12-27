@@ -9,8 +9,8 @@ namespace Nest.BaseCore.Domain
     /// <summary>
     /// 权限表
     /// </summary>
-    [Table("tbMenu")]
-    public class tbMenu
+    [Table("Menu")]
+    public class Menu
     {
         [Key]
         public string id { get; set; }

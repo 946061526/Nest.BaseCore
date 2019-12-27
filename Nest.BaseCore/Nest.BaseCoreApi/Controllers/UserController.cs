@@ -56,7 +56,7 @@ namespace Nest.BaseCoreApi.Controllers
         [Route("Add")]
         public void Add()
         {
-            var i = _userService.Add(new BaseCore.Domain.User());
+            var i = _userService.Add(new BaseCore.Domain.UserInfo());
         }
 
         [HttpPost]

@@ -31,14 +31,14 @@ namespace Nest.BaseCore.Service
         {
             var result = new ApiResultModel<LoginResponseModel>();
             var user = (from a in _db.User
-                        where a.userName == requestModel.UserName
+                        where a.UserName == requestModel.UserName
                         select new LoginResponseModel()
                         {
-                            UserId = a.id,
-                            UserName = a.userName,
-                            Name = a.name,
-                            RoleId = a.roleId,
-                            Password = a.password,
+                            UserId = a.Id,
+                            UserName = a.UserName,
+                            RealName = a.RealName,
+                            //RoleId = a.roleId,
+                            Password = a.Pwd,
                         }).FirstOrDefault();
 
             result.Data = user;
@@ -54,39 +54,39 @@ namespace Nest.BaseCore.Service
         {
             var result = _userRepository.Find().Select(a => new LoginResponseModel()
             {
-                UserId = a.id,
-                UserName = a.userName,
-                Name = a.name,
-                RoleId = a.roleId,
-                Password = a.password,
+                UserId = a.Id,
+                UserName = a.UserName,
+                RealName = a.RealName,
+                // RoleId = a.roleId,
+                Password = a.Pwd,
             }).ToList();
 
             return result;
         }
 
 
-        public int Add(User a)
+        public int Add(UserInfo a)
         {
-            User user = new User()
+            UserInfo user = new UserInfo()
             {
-                id = GuidTool.GetGuid(),
-                name = "Karroy",
-                userName = "Karroy",
-                password = "123",
-                roleId = "1"
+                Id = GuidTool.GetGuid(),
+                RealName = "Karroy",
+                UserName = "Karroy",
+                Pwd = "123",
+                //roleId = "1"
             };
             _userRepository.Add(user);
             var i = _userRepository.SaveChanges();
 
-            var users = new List<User>();
+            var users = new List<UserInfo>();
             users.Add(user);
-            user = new User()
+            user = new UserInfo()
             {
-                id = GuidTool.GetGuid(),
-                name = "jay",
-                userName = "jay",
-                password = "123",
-                roleId = "1"
+                Id = GuidTool.GetGuid(),
+                RealName = "jay",
+                UserName = "jay",
+                Pwd = "123",
+                // roleId = "1"
             };
             users.Add(user);
             _userRepository.Add(users);
@@ -94,25 +94,25 @@ namespace Nest.BaseCore.Service
 
             return i;
         }
-        public int Add(List<User> t)
+        public int Add(List<UserInfo> t)
         {
-            User user = new User()
+            UserInfo user = new UserInfo()
             {
-                id = GuidTool.GetGuid(),
-                name = "Karroy1",
-                userName = "Karroy1",
-                password = "123",
-                roleId = "1"
+                Id = GuidTool.GetGuid(),
+                RealName = "Karroy1",
+                UserName = "Karroy1",
+                Pwd = "123",
+                // roleId = "1"
             };
-            var users = new List<User>();
+            var users = new List<UserInfo>();
             users.Add(user);
-            user = new User()
+            user = new UserInfo()
             {
-                id = GuidTool.GetGuid(),
-                name = "jay",
-                userName = "jay",
-                password = "123",
-                roleId = "1"
+                Id = GuidTool.GetGuid(),
+                RealName = "jay",
+                UserName = "jay",
+                Pwd = "123",
+                //roleId = "1"
             };
             users.Add(user);
             _userRepository.Add(users);
@@ -121,20 +121,20 @@ namespace Nest.BaseCore.Service
 
         public int Update()
         {
-            var user = _userRepository.FirstOrDefault(x => x.userName == "Karroy1");
-            user.password = "";
+            var user = _userRepository.FirstOrDefault(x => x.UserName == "Karroy1");
+            user.Pwd = "";
             _userRepository.Update(user);
             var i = _userRepository.SaveChanges();
 
-            user.password = "123";
-            user.name = "jay";
+            user.Pwd = "123";
+            user.RealName = "jay";
             _userRepository.Update(user, "password", "name");
             i = _userRepository.SaveChanges();
 
             var list = _userRepository.Find().ToList();
             list.ForEach(item =>
             {
-                item.password = "d33f1a6621f17e8090f8fb9c1b6b6f01";
+                item.Pwd = "d33f1a6621f17e8090f8fb9c1b6b6f01";
             });
             _userRepository.Update(list, "password");
 
@@ -147,18 +147,18 @@ namespace Nest.BaseCore.Service
         {
             var u = _userRepository.FindById("2");
             u = _userRepository.FirstOrDefault();
-            u = _userRepository.FirstOrDefault(x => x.id == "1");
-            u = _userRepository.FirstOrDefault(x => x.id != "001cb07a8f4f49af9ccac6d5a96be07e", null);
+            u = _userRepository.FirstOrDefault(x => x.Id == "1");
+            u = _userRepository.FirstOrDefault(x => x.Id != "001cb07a8f4f49af9ccac6d5a96be07e", null);
 
             var list = _userRepository.Find().ToList();
-            list = _userRepository.Find(x => x.userName == "").ToList();
+            list = _userRepository.Find(x => x.UserName == "").ToList();
             list = _userRepository.Find(out int total, 1, 2).ToList();
 
-            var b = _userRepository.Any(x => x.password == "d33f1a6621f17e8090f8fb9c1b6b6f01");
+            var b = _userRepository.Any(x => x.Pwd == "d33f1a6621f17e8090f8fb9c1b6b6f01");
             b = _userRepository.Any();
 
             var c = _userRepository.Count();
-            c = _userRepository.Count(x => x.userName == "admin");
+            c = _userRepository.Count(x => x.UserName == "admin");
 
         }
 
@@ -167,18 +167,18 @@ namespace Nest.BaseCore.Service
             _userRepository.Delete("2");
             var i = _userRepository.SaveChanges();
 
-            User user = new User()
+            UserInfo user = new UserInfo()
             {
-                id = "2",
-                name = "Karroy",
-                userName = "Karroy",
-                password = "123",
-                roleId = "1"
+                Id = "2",
+                RealName = "Karroy",
+                UserName = "Karroy",
+                Pwd = "123",
+                //roleId = "1"
             };
             _userRepository.Add(user);
             i = _userRepository.SaveChanges();
 
-            _userRepository.Delete(x => x.id == "22");
+            _userRepository.Delete(x => x.Id == "22");
             i = _userRepository.SaveChanges();
         }
 

@@ -34,14 +34,14 @@ namespace Nest.BaseCore.Domain.ResponseModel
         /// <summary>
         /// 真实姓名
         /// </summary>
-        public string Name { get; set; }
-        /// <summary>
-        /// 角色Id
-        /// </summary>
-        public string RoleId { set; get; }
-        /// <summary>
-        /// 角色Id
-        /// </summary>
-        public string RoleName { set; get; }
+        public string RealName { get; set; }
+        ///// <summary>
+        ///// 角色Id
+        ///// </summary>
+        //public string RoleId { set; get; }
+        ///// <summary>
+        ///// 角色Id
+        ///// </summary>
+        //public string RoleName { set; get; }
     }
 }

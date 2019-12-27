@@ -9,8 +9,8 @@ namespace Nest.BaseCore.Domain
     /// <summary>
     /// 角色权限关联表
     /// </summary>
-    [Table("tbRoleMenu")]
-    public class tbRoleMenu
+    [Table("RoleMenu")]
+    public class RoleMenu
     {
         [Key]
         public string id { get; set; }

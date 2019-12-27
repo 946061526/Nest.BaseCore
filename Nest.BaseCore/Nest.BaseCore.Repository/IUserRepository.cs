@@ -8,12 +8,12 @@ namespace Nest.BaseCore.Repository
     /// <summary>
     /// 用户仓储
     /// </summary>
-    public interface IUserRepository : IBaseRepository<User>
+    public interface IUserRepository : IBaseRepository<UserInfo>
     {
 
     }
 
-    public class TUserRepository : BaseRepository<User>, IUserRepository
+    public class TUserRepository : BaseRepository<UserInfo>, IUserRepository
     {
         public TUserRepository(MainContext db) : base(db) { }
     }

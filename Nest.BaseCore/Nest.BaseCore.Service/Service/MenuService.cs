@@ -50,7 +50,7 @@ namespace Nest.BaseCore.Service
                     return result;
                 }
             }
-            var item = new tbMenu()
+            var item = new Menu()
             {
                 id = GuidTool.GetGuid(),
                 name = requestModel.MenuName,
@@ -111,7 +111,7 @@ namespace Nest.BaseCore.Service
 
             #region 查询条件
 
-            var filter = PredicateBuilder.True<tbMenu>();
+            var filter = PredicateBuilder.True<Menu>();
             filter = filter.And(xx => true);
             if (!requestModel.MenuName.IsNullOrEmpty())
             {

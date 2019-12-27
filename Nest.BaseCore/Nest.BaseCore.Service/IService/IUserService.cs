@@ -20,8 +20,8 @@ namespace Nest.BaseCore.Service
         /// <param name="requestModel">参数</param>
         List<LoginResponseModel> GetUserList();
 
-        int Add(User user);
-        int Add(List<User> users);
+        int Add(UserInfo user);
+        int Add(List<UserInfo> users);
 
         int Update();
 

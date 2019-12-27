@@ -10,21 +10,21 @@ namespace Nest.BaseCore.Common
     /// </summary>
     public class BaseRequestModel
     {
-        ///// <summary>
-        ///// 时间戳
-        ///// </summary>
-        //[Required]
-        //public string Timestamp { get; set; }
-        ///// <summary>
-        ///// 随机字符串
-        ///// </summary>
-        //[Required]
-        //public string Nonce { get; set; }
-        ///// <summary>
-        ///// 签名
-        ///// </summary>
-        //[Required]
-        //public string Signature { get; set; }
+        /// <summary>
+        /// 时间戳
+        /// </summary>
+        [Required]
+        public string Timestamp { get; set; }
+        /// <summary>
+        /// 随机字符串
+        /// </summary>
+        [Required]
+        public string Nonce { get; set; }
+        /// <summary>
+        /// 签名
+        /// </summary>
+        [Required]
+        public string Signature { get; set; }
     }
 
     /// <summary>

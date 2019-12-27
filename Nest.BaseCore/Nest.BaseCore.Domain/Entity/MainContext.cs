@@ -12,7 +12,7 @@ namespace Nest.BaseCore.Domain
         /// <summary>
         /// 用户表
         /// </summary>
-        public DbSet<User> User { get; set; }
+        public DbSet<UserInfo> User { get; set; }
 
         /// <summary>
         /// 角色表
@@ -22,12 +22,17 @@ namespace Nest.BaseCore.Domain
         /// <summary>
         /// 角色权限表
         /// </summary>
-        public DbSet<tbRoleMenu> RoleMenu { get; set; }
+        public DbSet<RoleMenu> RoleMenu { get; set; }
 
         /// <summary>
         /// 角色权限表
         /// </summary>
-        public DbSet<tbMenu> Menu { get; set; }
+        public DbSet<Menu> Menu { get; set; }
+
+        /// <summary>
+        /// App票据
+        /// </summary>
+        public DbSet<AppTicket> AppTicket { get; set; }
 
         ////对 DbContext 指定单数的表名来覆盖默认的表名
         //protected override void OnModelCreating(ModelBuilder modelBuilder)

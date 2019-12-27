@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Nest.BaseCore.Cache\Nest.BaseCore.Cache.csproj" />
     <ProjectReference Include="..\Nest.BaseCore.Domain\Nest.BaseCore.Domain.csproj" />
     <ProjectReference Include="..\Nest.BaseCore.Repository\Nest.BaseCore.Repository.csproj" />
   </ItemGroup>
