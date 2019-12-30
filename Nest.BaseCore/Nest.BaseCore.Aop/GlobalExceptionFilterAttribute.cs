@@ -30,8 +30,11 @@ namespace Nest.BaseCore.Aop
                 context.ExceptionHandled = true;
 
                 //日志
-                Net4Logger.Error(context.HttpContext.Request.Path, ex.Message, ex);
-                //_exceptionlessLogger.Error(context.HttpContext.Request.Path, ex.Message, "");
+                System.Threading.Tasks.Task.Run(() =>
+                {
+                    Net4Logger.Error(context.HttpContext.Request.Path, ex.Message, ex);
+                    //_exceptionlessLogger.Error(context.HttpContext.Request.Path, ex.Message, "");
+                });
             }
         }
     }

@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Nest.BaseCore.Domain
+namespace Nest.BaseCore.Common
 {
     /// <summary>
-    /// App票据信息
+    /// App票据模型
     /// </summary>
-    [Table("AppTicket")]
-    public class AppTicket
+    public class AppTicketModel
     {
         /// <summary>
         /// 主键
         /// </summary>
-        [Key]
         public string Id { get; set; }
         /// <summary>
         /// AppID

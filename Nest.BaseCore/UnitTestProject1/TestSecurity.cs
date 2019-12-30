@@ -12,18 +12,18 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestMd5()
         {
-            var str = MD5Helper.GetMd5("123456");
+            var str = MD5Helper.GetMd5("123456@xs");
         }
 
         [TestMethod]
         public void TestAES()
         {
-            var str = "123456";
-            str = AESHelper.AESEncrypt("123456");
+            var str = "123456@xs";
+            str = AESHelper.AESEncrypt(str);
             str = AESHelper.AESDecrypt(str);
 
             var key = GuidTool.GetGuid();
-            str = AESHelper.AESEncrypt("123456", key);
+            str = AESHelper.AESEncrypt(str, key);
             str = AESHelper.AESDecrypt(str, key);
         }
     }

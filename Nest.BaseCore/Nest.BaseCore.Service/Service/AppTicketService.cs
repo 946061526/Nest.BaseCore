@@ -7,6 +7,7 @@ using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Nest.BaseCore.Cache;
+using Nest.BaseCore.Domain.ResponseModel;
 
 namespace Nest.BaseCore.Service
 {
@@ -20,13 +21,13 @@ namespace Nest.BaseCore.Service
         }
 
         /// <summary>
-        /// 获取秘钥
+        /// 生成票据
         /// </summary>
         /// <param name="requestModel"></param>
         /// <returns></returns>
-        public ApiResultModel<string> GetAppSecret(AddAppTicketRequestModel requestModel)
+        public ApiResultModel<AddAppTicketResponseModel> GetAppTicket(AddAppTicketRequestModel requestModel)
         {
-            var result = new ApiResultModel<string>();
+            var result = new ApiResultModel<AddAppTicketResponseModel>() { Message = "生成票据失败" };
 
             if (requestModel.AppId.IsNullOrEmpty())
             {
@@ -38,44 +39,59 @@ namespace Nest.BaseCore.Service
                 result.Message = "客户端类型不能为空";
                 return result;
             }
-
-            var nons = Utils.getNoncestr();
-            var secret = MD5Helper.GetMd5($"{requestModel.AppId}{requestModel.ClientType}{nons}");
-
-            var ticket = _db.AppTicket.FirstOrDefault(x => x.AppId == requestModel.AppId && x.ClientType == requestModel.ClientType);
-            if (ticket == null)
+            if (requestModel.DeviceNo.IsNullOrEmpty())
             {
-                ticket = new AppTicket()
+                result.Message = "客户端设备号不能为空";
+                return result;
+            }
+
+            var nonce = Utils.getNonce();
+            var ticket = AuthenticationHelper.GetTicket(requestModel.AppId, requestModel.ClientType, requestModel.DeviceNo, nonce);
+            var secret = AuthenticationHelper.GetAppSecret(requestModel.AppId, requestModel.ClientType, requestModel.DeviceNo, nonce);
+            var resultData = new AddAppTicketResponseModel()
+            {
+                Ticket = ticket,
+                AppSecret = secret
+            };
+            AppTicket model = _db.AppTicket.FirstOrDefault(x => x.AppId == requestModel.AppId && x.ClientType == requestModel.ClientType && x.DeviceNo == requestModel.DeviceNo);
+            if (model == null)
+            {
+                model = new AppTicket()
                 {
                     Id = GuidTool.GetGuid(),
                     AppId = requestModel.AppId,
                     ClientType = requestModel.ClientType,
-                    Noncestr = nons,
+                    DeviceNo = requestModel.DeviceNo,
+                    Noncestr = nonce,
                     AppSecret = secret,
+                    Ticket = ticket,
                     LastUpdateTime = DateTime.Now
                 };
-                _db.AppTicket.Add(ticket);
-                _db.Entry(ticket).State = EntityState.Added;
+                _db.AppTicket.Add(model);
+                _db.Entry(model).State = EntityState.Added;
                 _db.SaveChanges();
             }
             else
             {
-                ticket.Noncestr = nons;
-                ticket.AppSecret = secret;
-                ticket.LastUpdateTime = DateTime.Now;
+                model.Noncestr = nonce;
+                model.AppSecret = secret;
+                model.Ticket = ticket;
+                model.LastUpdateTime = DateTime.Now;
 
-                _db.AppTicket.Attach(ticket);
-                _db.Entry(ticket).Property(x => x.Noncestr).IsModified = true;
-                _db.Entry(ticket).Property(x => x.AppSecret).IsModified = true;
-                _db.Entry(ticket).Property(x => x.LastUpdateTime).IsModified = true;
+                _db.AppTicket.Attach(model);
+                _db.Entry(model).Property(x => x.Noncestr).IsModified = true;
+                _db.Entry(model).Property(x => x.AppSecret).IsModified = true;
+                _db.Entry(model).Property(x => x.Ticket).IsModified = true;
+                _db.Entry(model).Property(x => x.LastUpdateTime).IsModified = true;
                 _db.SaveChanges();
             }
 
             //缓存
-            var redisKey = RedisCommon.GetSecretKey(MD5Helper.GetMd5($"{requestModel.AppId}{requestModel.ClientType}"));
-            RedisClient.Set(RedisDatabase.DB_AuthorityService, secret, redisKey, 60);//1小时
+            var redisKey = RedisCommon.GetTicketKey(ticket);
+            var redisData = model.MapTo<AppTicketModel>();
+            RedisClient.Set(RedisDatabase.DB_AuthorityService, redisKey, redisData, 60);//1小时
 
-            result.Data = secret;
+            result.Data = resultData; ;
             result.Code = ApiResultCode.Success;
             return result;
         }

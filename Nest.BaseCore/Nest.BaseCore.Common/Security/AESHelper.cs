@@ -11,7 +11,7 @@ namespace Nest.BaseCore.Common
     /// </summary>
     public class AESHelper
     {
-        private static readonly string _key = "5a4009a2847940029dabb536b68838ac";
+        private static readonly string _defaultKey = "5a4009a2847940029dabb536b68838ac";
 
         /// <summary>
         /// AES加密
@@ -20,7 +20,7 @@ namespace Nest.BaseCore.Common
         /// <returns></returns>
         public static string AESEncrypt(string str)
         {
-            return AESEncrypt(str, _key);
+            return AESEncrypt(str, _defaultKey);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Nest.BaseCore.Common
         /// <returns></returns>
         public static string AESDecrypt(string str)
         {
-            return AESDecrypt(str, _key);
+            return AESDecrypt(str, _defaultKey);
         }
 
         /// <summary>

@@ -13,7 +13,8 @@ namespace Nest.BaseCoreApi.Controllers
     /// 用户服务
     /// </summary>
     [Route("api/[controller]")]
-    //[TokenFilter]
+    //[Token]
+    [ValidateSignature]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -31,7 +32,7 @@ namespace Nest.BaseCoreApi.Controllers
         /// <param name="requestModel">参数</param>
         [HttpPost]
         [Route("Login")]
-        public ApiResultModel<LoginResponseModel> Login(LoginRequestModel requestModel)
+        public ApiResultModel<LoginResponseModel> Login([FromBody]LoginRequestModel requestModel)
         {
             throw new System.Exception("test");
 

@@ -151,16 +151,25 @@ namespace Nest.BaseCoreApi
                 {
                     var actionAttributes = descriptor.MethodInfo.GetCustomAttributes(inherit: true);
                     bool isAnonymous = actionAttributes.Any(a => a is AllowAnonymousAttribute);
-                    //非匿名的方法,链接中添加accesstoken值
+                    //非匿名的方法,链接中添加token值
                     if (!isAnonymous)
                     {
                         operation.Parameters.Add(new NonBodyParameter()
                         {
-                            Name = "token",
+                            Name = "Ticket",
                             In = "header",//query header body path formData
                             Type = "string",
-                            Description = "用于登录验证，没有可不传。后台根据需要做验证",
-                            Default = "token",
+                            Description = "票据，用于安全认证",
+                            Default = "Ticket",
+                            Required = true //是否必选
+                        });
+                        operation.Parameters.Add(new NonBodyParameter()
+                        {
+                            Name = "Token",
+                            In = "header",//query header body path formData
+                            Type = "string",
+                            Description = "登录身份验证令牌。没有可不传，后台根据需要做验证",
+                            Default = "Token",
                             Required = true //是否必选
                         });
                     }

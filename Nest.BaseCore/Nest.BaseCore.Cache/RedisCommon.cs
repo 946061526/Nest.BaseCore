@@ -18,13 +18,13 @@
         }
 
         /// <summary>
-        /// 秘钥缓存key
+        /// 票据缓存key
         /// </summary>
-        /// <param name="str">AppId等加密串</param>
+        /// <param name="ticket">AppId等加密串</param>
         /// <returns></returns>
-        public static string GetSecretKey(string str)
+        public static string GetTicketKey(string ticket)
         {
-            return $"secret:{str}";
+            return $"ticket:{ticket}";
         }
         #endregion
     }

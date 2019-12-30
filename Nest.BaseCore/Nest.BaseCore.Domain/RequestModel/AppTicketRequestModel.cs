@@ -9,7 +9,7 @@ namespace Nest.BaseCore.Domain.RequestModel
     {
     }
 
-    public class AddAppTicketRequestModel
+    public class AddAppTicketRequestModel : BaseRequestModel
     {
         /// <summary>
         /// AppID
@@ -19,5 +19,9 @@ namespace Nest.BaseCore.Domain.RequestModel
         /// 客户端类型（ios、android）
         /// </summary>
         public string ClientType { get; set; }
+        /// <summary>
+        /// 设备号
+        /// </summary>
+        public string DeviceNo { get; set; }
     }
 }

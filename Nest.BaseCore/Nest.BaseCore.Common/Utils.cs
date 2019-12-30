@@ -1,18 +1,21 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Nest.BaseCore.Common
 {
+    /// <summary>
+    /// 通用工具类
+    /// </summary>
     public class Utils
     {
         /// <summary>
-        /// 随机串
+        /// 随机字符串
         /// </summary>
-        public static string getNoncestr()
+        public static string getNonce()
         {
-            Random random = new Random();
-            return MD5Helper.GetMd5(random.Next(1000).ToString(), "GBK").ToLower().Replace("s", "S");
+            return MD5Helper.GetMd5(new Random().Next(1000).ToString()).ToLower().Replace("s", "S");
         }
 
         /// <summary>
@@ -23,5 +26,34 @@ namespace Nest.BaseCore.Common
             TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
             return Convert.ToInt64(ts.TotalSeconds).ToString();
         }
+
+        /// <summary>
+        /// 生成随机数字编码串（可用于短信码等）
+        /// </summary>
+        /// <returns></returns>
+        public static string GetRamdonCode(int length = 6)
+        {
+            if (length > 21)
+            {
+                length = 21;
+            }
+            StringBuilder maxNumber = new StringBuilder();
+            StringBuilder minNumber = new StringBuilder();
+            for (int i = 0; i < length; i++)
+            {
+                maxNumber.Append("9");
+                if (i == 0)
+                {
+                    minNumber.Append("1");
+                }
+                else
+                {
+                    minNumber.Append("0");
+                }
+            }
+            Random random = new Random(DateTime.Now.Second);
+            return random.Next(minNumber.ToString().ToInt(), maxNumber.ToString().ToInt()).ToString();
+        }
+
     }
 }

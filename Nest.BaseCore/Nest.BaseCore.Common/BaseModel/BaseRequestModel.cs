@@ -24,7 +24,7 @@ namespace Nest.BaseCore.Common
         /// 签名
         /// </summary>
         [Required]
-        public string Signature { get; set; }
+        public string Sign { get; set; }
     }
 
     /// <summary>
@@ -74,13 +74,11 @@ namespace Nest.BaseCore.Common
         /// <summary>
         /// 手机号
         /// </summary>
-        [Display(Name = "手机号")]
         public string Phone { get; set; }
 
         /// <summary>
         /// 类型:1教师/2家长
         /// </summary>
-        [Display(Name = "类型")]
         public int Type { get; set; }
     }
 
@@ -92,13 +90,11 @@ namespace Nest.BaseCore.Common
         /// <summary>
         /// 微信用户Id
         /// </summary>
-        [Display(Name = "微信用户Id")]
         public string OpenId { get; set; }
 
         /// <summary>
         /// 类型:1教师/2家长
         /// </summary>
-        [Display(Name = "类型")]
         public int Type { get; set; }
     }
 
@@ -110,13 +106,11 @@ namespace Nest.BaseCore.Common
         /// <summary>
         /// 手机号
         /// </summary>
-        [Display(Name = "手机号")]
         public string Phone { get; set; }
 
         /// <summary>
         /// 绑定密码
         /// </summary>
-        [Display(Name = "绑定密码")]
         public string Pwd { get; set; }
     }
 

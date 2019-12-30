@@ -1,5 +1,6 @@
 ﻿using Nest.BaseCore.Common;
 using Nest.BaseCore.Domain.RequestModel;
+using Nest.BaseCore.Domain.ResponseModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,10 +10,10 @@ namespace Nest.BaseCore.Service
     public interface IAppTicketService
     {
         /// <summary>
-        /// 获取秘钥
+        /// 生成票据
         /// </summary>
         /// <param name="requestModel"></param>
         /// <returns></returns>
-        ApiResultModel<string> GetAppSecret(AddAppTicketRequestModel requestModel);
+        ApiResultModel<AddAppTicketResponseModel> GetAppTicket(AddAppTicketRequestModel requestModel);
     }
 }

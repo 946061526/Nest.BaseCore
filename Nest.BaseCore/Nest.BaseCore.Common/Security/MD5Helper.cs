@@ -12,7 +12,7 @@ namespace Nest.BaseCore.Common
     public class MD5Helper
     {
         /// <summary>
-        /// md5加密
+        /// md5加密（返回大写，utf8编码方式）
         /// </summary>
         /// <param name="str">要加密的字符串</param>
         /// <returns></returns>
@@ -20,14 +20,14 @@ namespace Nest.BaseCore.Common
         {
             using (var md5 = MD5.Create())
             {
-                var value = md5.ComputeHash(Encoding.ASCII.GetBytes(str));
+                var value = md5.ComputeHash(Encoding.UTF8.GetBytes(str));
                 var result = BitConverter.ToString(value);
-                return result.ToLower().Replace("-", "");
+                return result.Replace("-", "");
             }
         }
 
         /// <summary>
-        /// md5加密
+        /// md5加密（返回大写）
         /// </summary>
         /// <param name="stream">要加密的流</param>
         /// <returns></returns>
@@ -37,7 +37,7 @@ namespace Nest.BaseCore.Common
             {
                 var value = md5.ComputeHash(stream);
                 var result = BitConverter.ToString(value);
-                return result.ToLower().Replace("-", "");
+                return result.Replace("-", "");
             }
         }
 
@@ -72,30 +72,5 @@ namespace Nest.BaseCore.Common
             return sb.ToString();
         }
 
-        /** 获取大写的MD5签名结果 */
-        public static string GetMd5(string encypStr, string charset)
-        {
-            string retStr;
-            MD5CryptoServiceProvider m5 = new MD5CryptoServiceProvider();
-
-            //创建md5对象
-            byte[] inputBye;
-            byte[] outputBye;
-
-            //使用GB2312编码方式把字符串转化为字节数组．
-            try
-            {
-                inputBye = Encoding.GetEncoding(charset).GetBytes(encypStr);
-            }
-            catch
-            {
-                inputBye = Encoding.GetEncoding("GB2312").GetBytes(encypStr);
-            }
-            outputBye = m5.ComputeHash(inputBye);
-
-            retStr = System.BitConverter.ToString(outputBye);
-            retStr = retStr.Replace("-", "").ToUpper();
-            return retStr;
-        }
     }
 }
