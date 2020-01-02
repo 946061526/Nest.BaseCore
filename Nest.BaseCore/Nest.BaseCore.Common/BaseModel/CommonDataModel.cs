@@ -9,10 +9,10 @@ namespace Nest.BaseCore.Common
     /// </summary>
     public class CommonDataModel
     {
-        public static readonly string SignKey = "Sign";
-        public static readonly string SourceKey = "Source";
-        public static readonly string TokenKey = "Token";
-        public static readonly string TicketKey = "Ticket";
-        public static readonly string TimestampKey = "Timestamp";
+        //public static readonly string SignKey = "Sign";
+        //public static readonly string SourceKey = "Source";
+        //public static readonly string TokenKey = "Token";
+        //public static readonly string TicketKey = "Ticket";
+        //public static readonly string TimestampKey = "Timestamp";
     }
 }

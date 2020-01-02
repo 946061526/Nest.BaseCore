@@ -16,6 +16,8 @@ namespace Nest.BaseCore.Aop
     /// </summary>
     public class TokenAttribute : ActionFilterAttribute
     {
+        const string TokenKey = "Token";
+        const string SourceKey = "Source";
         /// <summary>
         /// 方法执行前
         /// </summary>
@@ -35,10 +37,10 @@ namespace Nest.BaseCore.Aop
 
             ApiResultModel<string> apiResult = null;
             var path = context.HttpContext.Request.Path;
-            var source = context.HttpContext.Request.Headers[CommonDataModel.SourceKey];//请求来源为微信时，不做token验证
+            var source = context.HttpContext.Request.Headers[SourceKey];//请求来源为微信时，不做token验证
             if (string.IsNullOrEmpty(source) || source != "wx")
             {
-                var token = context.HttpContext.Request.Headers[CommonDataModel.TokenKey];
+                var token = context.HttpContext.Request.Headers[TokenKey];
                 if (!string.IsNullOrEmpty(token))
                 {
                     //不存在该缓存键

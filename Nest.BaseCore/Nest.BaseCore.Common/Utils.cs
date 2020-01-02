@@ -13,7 +13,7 @@ namespace Nest.BaseCore.Common
         /// <summary>
         /// 随机字符串
         /// </summary>
-        public static string getNonce()
+        public static string GetNonce()
         {
             return MD5Helper.GetMd5(new Random().Next(1000).ToString()).ToLower().Replace("s", "S");
         }
@@ -21,7 +21,7 @@ namespace Nest.BaseCore.Common
         /// <summary>
         /// 时间截，自1970年以来的秒数
         /// </summary>
-        public static string getTimestamp()
+        public static string GetTimestamp()
         {
             TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
             return Convert.ToInt64(ts.TotalSeconds).ToString();
@@ -53,6 +53,18 @@ namespace Nest.BaseCore.Common
             }
             Random random = new Random(DateTime.Now.Second);
             return random.Next(minNumber.ToString().ToInt(), maxNumber.ToString().ToInt()).ToString();
+        }
+
+        /// <summary>
+        /// 获取时间差天数
+        /// </summary>
+        /// <param name="sTime">开始时间</param>
+        /// <param name="eTime">结束时间</param>
+        /// <returns></returns>
+        public static int GetTimeSpanDays(DateTime sTime, DateTime eTime)
+        {
+            TimeSpan ts = eTime.Subtract(sTime);
+            return (int)ts.Days;
         }
 
     }

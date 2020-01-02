@@ -34,33 +34,28 @@ namespace Nest.BaseCore.Service
                 result.Message = "AppId不能为空";
                 return result;
             }
-            if (requestModel.ClientType.IsNullOrEmpty())
-            {
-                result.Message = "客户端类型不能为空";
-                return result;
-            }
             if (requestModel.DeviceNo.IsNullOrEmpty())
             {
                 result.Message = "客户端设备号不能为空";
                 return result;
             }
-
-            var nonce = Utils.getNonce();
-            var ticket = AuthenticationHelper.GetTicket(requestModel.AppId, requestModel.ClientType, requestModel.DeviceNo, nonce);
-            var secret = AuthenticationHelper.GetAppSecret(requestModel.AppId, requestModel.ClientType, requestModel.DeviceNo, nonce);
+            var clentType = requestModel.ClientType.GetEnumDescription();
+            var nonce = Utils.GetNonce();
+            var ticket = AuthenticationHelper.GetTicket(requestModel.AppId, clentType, requestModel.DeviceNo, nonce);
+            var secret = AuthenticationHelper.GetAppSecret(requestModel.AppId, clentType, requestModel.DeviceNo, nonce);
             var resultData = new AddAppTicketResponseModel()
             {
                 Ticket = ticket,
                 AppSecret = secret
             };
-            AppTicket model = _db.AppTicket.FirstOrDefault(x => x.AppId == requestModel.AppId && x.ClientType == requestModel.ClientType && x.DeviceNo == requestModel.DeviceNo);
+            AppTicket model = _db.AppTicket.FirstOrDefault(x => x.AppId == requestModel.AppId && x.ClientType == clentType && x.DeviceNo == requestModel.DeviceNo);
             if (model == null)
             {
                 model = new AppTicket()
                 {
                     Id = GuidTool.GetGuid(),
                     AppId = requestModel.AppId,
-                    ClientType = requestModel.ClientType,
+                    ClientType = clentType,
                     DeviceNo = requestModel.DeviceNo,
                     Noncestr = nonce,
                     AppSecret = secret,
@@ -91,7 +86,7 @@ namespace Nest.BaseCore.Service
             var redisData = model.MapTo<AppTicketModel>();
             RedisClient.Set(RedisDatabase.DB_AuthorityService, redisKey, redisData, 60);//1小时
 
-            result.Data = resultData; ;
+            result.Data = resultData;
             result.Code = ApiResultCode.Success;
             return result;
         }

@@ -9,9 +9,7 @@ namespace Nest.BaseCore.Common
     /// </summary>
     public class AuthenticationHelper
     {
-        private const string SignKey = "Sign";
-        private const string Timestamp = "Timestamp";
-        private const string PrivateSecretKey = "NestBaseCore";
+        private const string PrivateSecretKey = "6424cb5a2d99e2128d234f7cf3527c7d";
 
         /// <summary>
         /// 生成Token
