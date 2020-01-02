@@ -70,11 +70,11 @@ namespace Nest.BaseCore.Common
             {
                 if (keyvalue.Value != null && keyvalue.Value.GetType().FullName != "System.String" && (keyvalue.Value.GetType().IsClass || keyvalue.Value.GetType().IsInterface))
                 {
-                    sb.AppendFormat("{0}={1}&", keyvalue.Key, JsonHelper.SerializeObject(keyvalue.Value));
+                    sb.Append($"{keyvalue.Key}={JsonHelper.SerializeObject(keyvalue.Value)}&");
                 }
                 else
                 {
-                    sb.AppendFormat("{0}={1}&", keyvalue.Key, keyvalue.Value);
+                    sb.Append($"{keyvalue.Key}={keyvalue.Value}&");
                 }
             }
             var str = sb.ToString().TrimEnd('&');
@@ -96,11 +96,11 @@ namespace Nest.BaseCore.Common
             {
                 if (keyvalue.Value != null && keyvalue.Value.GetType().FullName != "System.String" && (keyvalue.Value.GetType().IsClass || keyvalue.Value.GetType().IsInterface))
                 {
-                    sb.AppendFormat("{0}={1}&", keyvalue.Key, JsonHelper.SerializeObject(keyvalue.Value));
+                    sb.Append($"{keyvalue.Key}={JsonHelper.SerializeObject(keyvalue.Value)}&");
                 }
                 else
                 {
-                    sb.AppendFormat("{0}={1}&", keyvalue.Key, keyvalue.Value);
+                    sb.Append($"{keyvalue.Key}={keyvalue.Value}&");
                 }
             }
             var str = sb.ToString().TrimEnd('&');
