@@ -1,4 +1,4 @@
-﻿/*
+/*
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2019-12-30 17:45:47
+Date: 2020-01-03 16:52:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `appticket` (
   `ClientType` varchar(20) NOT NULL,
   `DeviceNo` varchar(30) NOT NULL,
   `Noncestr` varchar(50) DEFAULT NULL,
-  `AppSecret` varchar(50) NOT NULL,
+  `AppSecret` varchar(200) NOT NULL,
   `Ticket` varchar(50) NOT NULL,
   `LastUpdateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Id`)
@@ -33,6 +33,46 @@ CREATE TABLE `appticket` (
 
 -- ----------------------------
 -- Records of appticket
+-- ----------------------------
+INSERT INTO `appticket` VALUES ('7db59180081b4a0b8f8dc7e0237b7ee5', '1234', 'ios', '123', 'e0ec453e28e061cc58ac43f91dc2f3f0', 'qOV/F+i6hNVGkn7JHv74oIqQc7579vQECkbc4tGS1Pwwa93yQ/ZHpUlaDHdnOrwBUxZzMi53yHilYhWW0O9oxg==', '4E8ADA639D95B6C6E24E0070A078F69A', '2019-12-31 17:57:46');
+
+-- ----------------------------
+-- Table structure for cap.published
+-- ----------------------------
+DROP TABLE IF EXISTS `cap.published`;
+CREATE TABLE `cap.published` (
+  `Id` int(127) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(200) NOT NULL,
+  `Content` longtext,
+  `Retries` int(11) DEFAULT NULL,
+  `Added` datetime NOT NULL,
+  `ExpiresAt` datetime DEFAULT NULL,
+  `StatusName` varchar(40) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cap.published
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for cap.received
+-- ----------------------------
+DROP TABLE IF EXISTS `cap.received`;
+CREATE TABLE `cap.received` (
+  `Id` int(127) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(400) NOT NULL,
+  `Group` varchar(200) DEFAULT NULL,
+  `Content` longtext,
+  `Retries` int(11) DEFAULT NULL,
+  `Added` datetime NOT NULL,
+  `ExpiresAt` datetime DEFAULT NULL,
+  `StatusName` varchar(50) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cap.received
 -- ----------------------------
 
 -- ----------------------------
