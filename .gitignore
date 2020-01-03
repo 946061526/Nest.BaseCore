@@ -27,3 +27,4 @@
 /Nest.BaseCore/Nest.BaseCoreApi/Log/LogDebug/*.log
 /Nest.BaseCore/Nest.BaseCoreApi/Log/LogError/*.log
 /Nest.BaseCore/Nest.BaseCoreApi/Log/LogInfo/*.log
+/Nest.BaseCore/Nest.BaseCoreApi/Log
