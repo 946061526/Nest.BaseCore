@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Exceptionless;
 using log4net;
@@ -13,21 +7,22 @@ using log4net.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Nest.BaseCore.Aop;
 using Nest.BaseCore.Domain;
 using Nest.BaseCore.Log;
-using Nest.BaseCore.Repository;
-using Nest.BaseCore.Service;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using DotNetCore.CAP;
 
 namespace Nest.BaseCoreApi
 {
@@ -68,6 +63,31 @@ namespace Nest.BaseCoreApi
 
             var connection = Configuration.GetConnectionString("MySQL");
             services.AddDbContext<MainContext>(options => options.UseMySQL(connection));
+
+            //配置CAP
+            services.AddCap(cap =>
+            {
+                cap.UseEntityFramework<MainContext>();
+
+                //启用操作面板
+                cap.UseDashboard();
+
+                //使用RabbitMQ
+                cap.UseRabbitMQ(rb =>
+                {
+                    //rabbitmq服务器配置
+                    rb.HostName = "192.168.1.221";
+                    rb.UserName = "guest";
+                    rb.Password = "guest";
+                });
+
+                //设置处理成功的数据在数据库中保存的时间（秒），为保证系统新能，数据会定期清理。
+                cap.SucceedMessageExpiredAfter = 24 * 3600;
+
+                //设置失败重试次数
+                cap.FailedRetryCount = 5;
+            });
+
 
             services.AddMvc(options =>
             {
@@ -128,6 +148,9 @@ namespace Nest.BaseCoreApi
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Nest.BaseCore.Web");
                 c.RoutePrefix = string.Empty;
             });
+
+            //启用cap中间件
+            app.UseCap();
 
             app.UseMvc();
 

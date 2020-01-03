@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DotNetCore.CAP;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nest.BaseCore.Aop;
@@ -26,10 +27,13 @@ namespace Nest.BaseCoreApi.Controllers
     {
         public IExceptionlessLogger _Log { get; }
         private readonly IUserService _userService;
-        public TestController(IExceptionlessLogger log, IUserService userService)
+        private readonly ICapPublisher _publisher;
+
+        public TestController(IExceptionlessLogger log, IUserService userService, ICapPublisher publisher)
         {
             _Log = log;
             _userService = userService;
+            _publisher = publisher;
         }
 
         /// <summary>
@@ -396,6 +400,41 @@ namespace Nest.BaseCoreApi.Controllers
 
             return newDirPre;
         }
+
+        #region cap测试
+
+        /// <summary>
+        /// 发送的消息RouteKey，可以理解为消息管道的名称
+        /// </summary>
+        private const string CapTestQueue = "cap.test.queue";
+
+        /// <summary>
+        /// 发送mq
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public string SendMq(string message)
+        {
+            _publisher.Publish(CapTestQueue, message);
+
+            return "发送成功";
+        }
+
+        /// <summary>
+        /// 接收mq
+        /// </summary>
+        /// <param name="message"></param>
+        [NonAction]
+        [CapSubscribe(CapTestQueue)]
+        public void GetMq(string message)
+        {
+            Console.WriteLine(DateTime.Now.ToString() + "收到消息:" + message);
+            //throw new Exception("测试失败重试");
+        }
+
+        #endregion
+
     }
 
     #region 签名实体
