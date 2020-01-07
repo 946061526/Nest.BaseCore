@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <Reference Include="ChnCharInfo">
-      <HintPath>..\resource\外部dll\ChnCharInfo.dll</HintPath>
+      <HintPath>..\resource\dll\ChnCharInfo.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Configuration">
       <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
