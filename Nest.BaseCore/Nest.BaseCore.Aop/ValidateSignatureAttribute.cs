@@ -52,7 +52,7 @@ namespace Nest.BaseCore.Aop
 
             string ticket = "";
             var secret = "";
-            if (context.RouteData.Values["Action"].ToString() != "GetAppTicket")
+            if (context.RouteData.Values["Action"].ToString().ToLower() != "getappticket")
             {
                 if (request.Headers.ContainsKey(TicketKey))
                 {

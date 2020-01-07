@@ -12,11 +12,11 @@ namespace Nest.BaseCore.Aop
     /// </summary>
     public class GlobalExceptionAttribute : IExceptionFilter
     {
-        private readonly IExceptionlessLogger _exceptionlessLogger;
-        public GlobalExceptionAttribute(IExceptionlessLogger exceptionlessLogger)
-        {
-            _exceptionlessLogger = exceptionlessLogger;
-        }
+        //private readonly IExceptionlessLogger _exceptionlessLogger;
+        //public GlobalExceptionAttribute(IExceptionlessLogger exceptionlessLogger)
+        //{
+        //    _exceptionlessLogger = exceptionlessLogger;
+        //}
 
         public void OnException(ExceptionContext context)
         {

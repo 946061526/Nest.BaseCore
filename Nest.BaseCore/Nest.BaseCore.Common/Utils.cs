@@ -67,5 +67,31 @@ namespace Nest.BaseCore.Common
             return (int)ts.Days;
         }
 
+        /// <summary>
+        /// 获取两个经纬度之间的距离（单位：米）
+        /// </summary>
+        /// <param name="longitude1">经度1</param>
+        /// <param name="latitude1">纬度1</param>
+        /// <param name="longitude2">经度2</param>
+        /// <param name="latitude2">纬度2</param>
+        /// <returns>两经纬度之间距离（单位：米）</returns>
+        public static double GetDistance(double longitude1, double latitude1, double longitude2, double latitude2)
+        {
+            double dd = HaversineHelper.Distance(longitude1, latitude1, longitude2, latitude2);
+            dd = Math.Round(dd, 2);
+            return dd;
+        }
+        /// <summary>
+        /// 获取两个经纬度之间的距离（单位：米）
+        /// </summary>
+        /// <param name="longitude1">经度1</param>
+        /// <param name="latitude1">纬度1</param>
+        /// <param name="longitude2">经度2</param>
+        /// <param name="latitude2">纬度2</param>
+        /// <returns>两经纬度之间距离（单位：米）</returns>
+        public static double GetDistance(string longitude1, string latitude1, string longitude2, string latitude2)
+        {
+            return GetDistance(longitude1.ToDouble(), latitude1.ToDouble(), longitude2.ToDouble(), latitude2.ToDouble());
+        }
     }
 }

@@ -22,7 +22,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using DotNetCore.CAP;
 
 namespace Nest.BaseCoreApi
 {
@@ -145,7 +144,7 @@ namespace Nest.BaseCoreApi
             //启用中间件服务对swagger-ui，指定Swagger JSON终结点
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Nest.BaseCore.Web");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Nest.BaseCoreApi");
                 c.RoutePrefix = string.Empty;
             });
 
@@ -179,20 +178,20 @@ namespace Nest.BaseCoreApi
                     {
                         operation.Parameters.Add(new NonBodyParameter()
                         {
-                            Name = "Ticket",
+                            Name = "ticket",
                             In = "header",//query header body path formData
                             Type = "string",
                             Description = "票据，用于安全认证",
-                            Default = "Ticket",
+                            Default = "ticket",
                             Required = true //是否必选
                         });
                         operation.Parameters.Add(new NonBodyParameter()
                         {
-                            Name = "Token",
+                            Name = "token",
                             In = "header",//query header body path formData
                             Type = "string",
                             Description = "登录身份验证令牌。没有可不传，后台根据需要做验证",
-                            Default = "Token",
+                            Default = "token",
                             Required = true //是否必选
                         });
                     }

@@ -16,8 +16,8 @@ namespace Nest.BaseCore.Aop
     /// </summary>
     public class TokenAttribute : ActionFilterAttribute
     {
-        const string TokenKey = "Token";
-        const string SourceKey = "Source";
+        const string TokenKey = "token";
+        const string SourceKey = "source";
         /// <summary>
         /// 方法执行前
         /// </summary>
