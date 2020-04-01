@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nest.BaseCore.MessageQueue"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.网关", "0.网关", "{37FD2806-7AC3-4B90-82A7-382FC9E457DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.BaseCore.Gateway", "Nest.BaseCore.Gateway\Nest.BaseCore.Gateway.csproj", "{830EA192-C8C0-440E-8490-8708BBD59E6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nest.BaseCore.Gateway", "Nest.BaseCore.Gateway\Nest.BaseCore.Gateway.csproj", "{830EA192-C8C0-440E-8490-8708BBD59E6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.BaseCore.Database", "Nest.BaseCore.Database\Nest.BaseCore.Database.csproj", "{F3E2EF55-B730-4A32-80A8-1743B1C3B262}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,10 @@ Global
 		{830EA192-C8C0-440E-8490-8708BBD59E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{830EA192-C8C0-440E-8490-8708BBD59E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{830EA192-C8C0-440E-8490-8708BBD59E6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3E2EF55-B730-4A32-80A8-1743B1C3B262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3E2EF55-B730-4A32-80A8-1743B1C3B262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3E2EF55-B730-4A32-80A8-1743B1C3B262}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3E2EF55-B730-4A32-80A8-1743B1C3B262}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +118,7 @@ Global
 		{7857BBF8-B71D-4DB4-A30B-D38A9AA2A5A9} = {ECCFDDBF-C14E-47E9-997E-C8345921DD0F}
 		{C9662E70-BEB5-4254-8F5F-EAFA8AF51759} = {46F9815F-7A52-46EB-875A-A9F1EF8C25A9}
 		{830EA192-C8C0-440E-8490-8708BBD59E6F} = {37FD2806-7AC3-4B90-82A7-382FC9E457DC}
+		{F3E2EF55-B730-4A32-80A8-1743B1C3B262} = {46F9815F-7A52-46EB-875A-A9F1EF8C25A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B3747AB-FBB7-4549-936E-6DFE03CC19C3}

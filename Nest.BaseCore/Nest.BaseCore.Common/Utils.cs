@@ -93,5 +93,30 @@ namespace Nest.BaseCore.Common
         {
             return GetDistance(longitude1.ToDouble(), latitude1.ToDouble(), longitude2.ToDouble(), latitude2.ToDouble());
         }
+
+        /// <summary>
+        /// URL字符编码
+        /// </summary>
+        public static string UrlEncode(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return "";
+            }
+            str = str.Replace("'", "");
+            return System.Web.HttpUtility.UrlEncode(str); //HttpUtility.UrlEncode("text", System.Text.Encoding.GetEncoding("gb2312"))
+        }
+
+        /// <summary>
+        /// URL字符解码
+        /// </summary>
+        public static string UrlDecode(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return "";
+            }
+            return System.Web.HttpUtility.UrlEncode(str);
+        }
     }
 }

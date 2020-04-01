@@ -1,5 +1,7 @@
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nest.BaseCore.Common;
 using Nest.BaseCore.Domain;
@@ -11,23 +13,42 @@ using System.Collections.Generic;
 namespace UnitTestProject1
 {
     [TestClass]
-    public class TestUser
+    public class TestUser: BaseTest
     {
         DbContextOptions<MainContext> options;
 
+        //private readonly IUserService _userService;
+        //private readonly IUserRepository _userRepository;
+
         private readonly IUserService _userService;
-        private readonly IUserRepository _userRepository;
+
         public TestUser()
         {
-            //IServiceProvider 
-            //options = new DbContextOptions<MainContext>();
-            //options.
-            //AutofacConfig.RegisterAutoFac();
-            using (var scope = AutofacConfig.RegisterAutoFac().BeginLifetimeScope())
-            {
-                _userService = scope.Resolve<IUserService>();
-               // _userRepository = scope.Resolve<IUserRepository>();
-            }
+            //_userService = base.Resolve<IUserService>();
+
+
+            ////IServiceProvider 
+            ////options = new DbContextOptions<MainContext>();
+            ////options.
+            ////AutofacConfig.RegisterAutoFac();
+
+            IServiceCollection services = new ServiceCollection();
+            var connection = "server=192.168.1.230;port=3306;database=XFaceUserServiceDB;uid=root;pwd=123456;CharSet=utf8;TreatTinyAsBoolean=true";
+            services.AddDbContext<MainContext>(options => options.UseMySQL(connection));
+            
+            ////services.AddSingleton<IUserRepository, TUserRepository>();
+            ////services.AddScoped<IUserService>();
+
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
+
+            
+            //////var userResp = serviceProvider.GetService<IUserRepository>();
+            ////_userService = serviceProvider.GetService<IUserService>();
+
+            //var container = AutofacConfig.RegisterAutoFac();
+            //var autoServiceProvider = new AutofacServiceProvider(container);
+            //_userRepository = container.Resolve<IUserRepository>();
+            //_userService = autoServiceProvider.GetService<IUserService>();
         }
 
 

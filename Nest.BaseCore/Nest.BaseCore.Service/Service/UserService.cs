@@ -12,14 +12,12 @@ namespace Nest.BaseCore.Service
 {
     public class UserService : IUserService
     {
-        private readonly MainContext _db;
-        private readonly IConfiguration _config;
-        private HttpClient _httpClient;
+        //private readonly IConfiguration _config;
+        //private HttpClient _httpClient;
         private readonly IUserRepository _userRepository;
 
-        public UserService(MainContext db, IUserRepository userRepository)
+        public UserService(IUserRepository userRepository)
         {
-            _db = db;
             _userRepository = userRepository;
         }
 
@@ -30,7 +28,7 @@ namespace Nest.BaseCore.Service
         public ApiResultModel<LoginResponseModel> Login(LoginRequestModel requestModel)
         {
             var result = new ApiResultModel<LoginResponseModel>();
-            var user = (from a in _db.User
+            var user = (from a in _userRepository.Find()
                         where a.UserName == requestModel.UserName
                         select new LoginResponseModel()
                         {
@@ -182,5 +180,29 @@ namespace Nest.BaseCore.Service
             i = _userRepository.SaveChanges();
         }
 
+        public ApiResultModel<int> Add(AddUserRequestModel requestModel)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ApiResultModel<int> Delete(BaseIdModel idModel)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ApiResultModel<int> Edit(EditUserRequestModel requestModel)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ApiResultModel<QueryUserResponseModel> GetOne(BaseIdModel idModel)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ApiResultModel<List<QueryUserResponseModel>> GetList(QueryUserRequestModel requestModel)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

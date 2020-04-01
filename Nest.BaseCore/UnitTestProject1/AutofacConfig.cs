@@ -8,7 +8,13 @@ namespace UnitTestProject1
 {
     public class AutofacConfig
     {
-        public static IContainer RegisterAutoFac()
+        protected static IContainer Container
+        {
+            get;
+            set;
+        }
+
+        public static void Register()
         {
             ContainerBuilder builder = new ContainerBuilder();
 
@@ -19,9 +25,13 @@ namespace UnitTestProject1
                    .AsSelf().AsImplementedInterfaces()
                    .PropertiesAutowired().InstancePerLifetimeScope();
 
-            var container = builder.Build();
-            return container;
-
+            Container = builder.Build();
         }
+
+        public static T Resolve<T>()
+        {
+            return Container.Resolve<T>();
+        }
+
     }
 }

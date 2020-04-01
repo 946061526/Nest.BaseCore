@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Nest.BaseCore.Service
 {
-    public interface IMenuService
+    public interface IMenuService : IBaseService<BaseIdModel, AddMenuRequestModel, EditMenuRequestModel, QueryMenuRequestModel, MenuResponseModel>
     {
         /// <summary>
         /// 新增菜单

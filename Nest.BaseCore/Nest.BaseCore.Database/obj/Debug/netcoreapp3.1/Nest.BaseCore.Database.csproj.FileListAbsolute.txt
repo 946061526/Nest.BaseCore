@@ -1,0 +1,8 @@
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Database\bin\Debug\netcoreapp3.1\Nest.BaseCore.Database.deps.json
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Database\bin\Debug\netcoreapp3.1\Nest.BaseCore.Database.dll
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Database\obj\Debug\netcoreapp3.1\Nest.BaseCore.Database.csprojAssemblyReference.cache
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Database\obj\Debug\netcoreapp3.1\Nest.BaseCore.Database.AssemblyInfoInputs.cache
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Database\obj\Debug\netcoreapp3.1\Nest.BaseCore.Database.AssemblyInfo.cs
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Database\bin\Debug\netcoreapp3.1\Nest.BaseCore.Database.pdb
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Database\obj\Debug\netcoreapp3.1\Nest.BaseCore.Database.dll
+D:\zzProj\MyGit\Nest.BaseCore\Nest.BaseCore\Nest.BaseCore.Database\obj\Debug\netcoreapp3.1\Nest.BaseCore.Database.pdb

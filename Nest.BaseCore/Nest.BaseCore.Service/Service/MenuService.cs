@@ -3,6 +3,7 @@ using Nest.BaseCore.Common;
 using Nest.BaseCore.Domain;
 using Nest.BaseCore.Domain.RequestModel;
 using Nest.BaseCore.Domain.ResponseModel;
+using Nest.BaseCore.Repository;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,11 +11,12 @@ namespace Nest.BaseCore.Service
 {
     public class MenuService : IMenuService
     {
-        private readonly MainContext _db;
+        //private readonly MainContext _db;
+        private readonly IMenuRepository _menuRepository;
 
-        public MenuService(MainContext db)
+        public MenuService(IMenuRepository menuRepository)
         {
-            _db = db;
+            _menuRepository = menuRepository;
         }
 
         /// <summary>
@@ -43,7 +45,7 @@ namespace Nest.BaseCore.Service
             //}
             if (requestModel.Type == MenuTypeEnum.Module || requestModel.Type == MenuTypeEnum.Function)
             {
-                var menu = _db.Menu.FirstOrDefault(x => x.name == requestModel.MenuName && x.type == (int)requestModel.Type);
+                var menu = _menuRepository.FirstOrDefault(x => x.name == requestModel.MenuName && x.type == (int)requestModel.Type);
                 if (menu != null)
                 {
                     result.Message = "此菜单名已存在";
@@ -60,9 +62,9 @@ namespace Nest.BaseCore.Service
                 path = requestModel.Path ?? "",
                 icon = requestModel.Icon ?? "",
             };
-            _db.Menu.Add(item);
-            _db.Entry(item).State = EntityState.Added;
-            _db.SaveChanges();
+            _menuRepository.Add(item);
+            //_menuRepository.Entry(item).State = EntityState.Added;
+            _menuRepository.SaveChanges();
 
             result.Code = ApiResultCode.Success;
             return result;
@@ -82,7 +84,7 @@ namespace Nest.BaseCore.Service
                 result.Message = "菜单ID不能为空";
                 return result;
             }
-            var menus = _db.Menu.Where(x => x.id == requestModel.Id || x.parentId == requestModel.Id).ToList();
+            var menus = _menuRepository.Find(x => x.id == requestModel.Id || x.parentId == requestModel.Id).ToList();
             if (!menus.Any(x => x.id == requestModel.Id))
             {
                 result.Message = "菜单不存在";
@@ -94,11 +96,18 @@ namespace Nest.BaseCore.Service
                 return result;
             }
             var menu = menus.FirstOrDefault(x => x.id == requestModel.Id);
-            _db.Entry(menu).State = EntityState.Deleted;
-            _db.SaveChanges();
+            //_db.Entry(menu).State = EntityState.Deleted;
+            //_db.SaveChanges();
+            _menuRepository.Delete(menu);
+            _menuRepository.SaveChanges();
 
             result.Code = ApiResultCode.Success;
             return result;
+        }
+
+        public ApiResultModel<int> Edit(EditMenuRequestModel requestModel)
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>
@@ -127,7 +136,7 @@ namespace Nest.BaseCore.Service
             }
             #endregion
 
-            var list = (from m in _db.Menu.Where(filter)
+            var list = (from m in _menuRepository.Find(filter)
                         orderby m.type, m.sort
                         select new MenuResponseModel
                         {
@@ -143,6 +152,11 @@ namespace Nest.BaseCore.Service
             result.Data = list.Any() ? list : new List<MenuResponseModel>();
             result.Code = ApiResultCode.Success;
             return result;
+        }
+
+        public ApiResultModel<MenuResponseModel> GetOne(BaseIdModel idModel)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

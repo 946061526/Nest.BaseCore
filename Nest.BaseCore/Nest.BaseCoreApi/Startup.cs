@@ -63,6 +63,9 @@ namespace Nest.BaseCoreApi
             var connection = Configuration.GetConnectionString("MySQL");
             services.AddDbContext<MainContext>(options => options.UseMySQL(connection));
 
+            //注入HttpContex
+            services.AddSingleton<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();
+
             //配置CAP
             services.AddCap(cap =>
             {
@@ -136,6 +139,9 @@ namespace Nest.BaseCoreApi
             {
                 app.UseHsts();
             }
+
+            //注入HttpContex
+            Nest.BaseCore.Common.HttpContext.Configure(app.ApplicationServices.GetRequiredService<Microsoft.AspNetCore.Http.IHttpContextAccessor>());
 
             app.UseHttpsRedirection();
 

@@ -51,6 +51,8 @@ namespace Nest.BaseCore.Domain.RequestModel
         public int Sort { get; set; } = 0;
     }
 
+    public class EditMenuRequestModel { }
+
     /// <summary>
     /// 查询菜单 参数
     /// </summary>

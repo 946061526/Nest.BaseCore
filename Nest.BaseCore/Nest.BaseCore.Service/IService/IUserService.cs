@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Nest.BaseCore.Service
 {
-    public interface IUserService
+    public interface IUserService : IBaseService<BaseIdModel, AddUserRequestModel, EditUserRequestModel, QueryUserRequestModel, QueryUserResponseModel>
     {
         /// <summary>
         /// 登录

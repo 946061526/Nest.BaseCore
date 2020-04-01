@@ -27,9 +27,9 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestExceptionlessLog()
         {
-            _exceptionlessLogger.Debug("debug", "昂首已公司都该哦IQ日均额我就是国家法定124safs", "args", "jaksljfdisu35435");
-            _exceptionlessLogger.Error("error", "昂首已公司都该哦IQ日均额我就是国家法定124safs", "args", "agfdsgffdg");
-            _exceptionlessLogger.Info("info", "昂首已公司都该哦IQ日均额我就是国家法定124safs", "args", "2903859rg");
+            _exceptionlessLogger.Debug("debug", "昂首已公司都该哦IQ日均额我就是国家法定124safs", "tag1");
+            _exceptionlessLogger.Error("error", "昂首已公司都该哦IQ日均额我就是国家法定124safs", "tag1", "tag2");
+            _exceptionlessLogger.Info("info  ", "昂首已公司都该哦IQ日均额我就是国家法定124safs", "tag1", "tag2", "tag3");
         }
     }
 }

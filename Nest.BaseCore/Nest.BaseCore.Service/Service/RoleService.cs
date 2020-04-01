@@ -1,4 +1,6 @@
-﻿using Nest.BaseCore.Domain.ResponseModel;
+﻿using Nest.BaseCore.Common;
+using Nest.BaseCore.Domain.RequestModel;
+using Nest.BaseCore.Domain.ResponseModel;
 using Nest.BaseCore.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ namespace Nest.BaseCore.Service
 {
     public class RoleService : IRoleService
     {
-        private HttpClient _httpClient;
+        //private HttpClient _httpClient;
         private readonly IRoleRepository _roleRepository;
 
         public RoleService(IRoleRepository roleRepository)
@@ -32,5 +34,35 @@ namespace Nest.BaseCore.Service
 
             return result;
         }
+
+        public ApiResultModel<int> Add(AddRoleRequestModel requestModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApiResultModel<int> Delete(BaseIdModel idModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApiResultModel<int> Edit(EditRoleRequestModel requestModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApiResultModel<QueryRoleResponseModel> GetOne(BaseIdModel idModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApiResultModel<List<QueryRoleResponseModel>> GetList(QueryRoleRequestModel requestModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        //public ApiResultModel<List<QueryRoleResponseModel>> GetListPage(QueryRolePageRequestModel requestModel)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
