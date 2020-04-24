@@ -34,6 +34,15 @@ namespace Nest.BaseCore.Domain
         /// </summary>
         public DbSet<AppTicket> AppTicket { get; set; }
 
+        /// <summary>
+        /// 库存
+        /// </summary>
+        public DbSet<Stock> Stock { get; set; }
+        /// <summary>
+        /// 库存盘点
+        /// </summary>
+        public DbSet<StockCheck> StockCheck { get; set; }
+
         ////对 DbContext 指定单数的表名来覆盖默认的表名
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
