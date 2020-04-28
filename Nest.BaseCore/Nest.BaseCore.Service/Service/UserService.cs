@@ -77,6 +77,14 @@ namespace Nest.BaseCore.Service
             var i = _userRepository.SaveChanges();
 
             var users = new List<UserInfo>();
+            user = new UserInfo()
+            {
+                Id = GuidTool.GetGuid(),
+                RealName = "Karroy",
+                UserName = "Karroy",
+                Pwd = "123",
+                //roleId = "1"
+            };
             users.Add(user);
             user = new UserInfo()
             {
