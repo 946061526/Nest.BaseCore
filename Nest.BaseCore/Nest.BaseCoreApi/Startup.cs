@@ -99,9 +99,6 @@ namespace Nest.BaseCoreApi
             //注入Logger服务
             services.AddSingleton<IExceptionlessLogger, ExceptionlessLogger>();
 
-            ////注入逻辑层服务
-            //services.AddScoped<IUserService, UserService>()
-            //    .AddScoped<IRoleService, RoleService>();
 
             //初始化Net4Log
             ILoggerRepository repository = LogManager.CreateRepository("Net4LoggerRepository");
